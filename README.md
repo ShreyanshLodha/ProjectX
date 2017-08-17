@@ -30,3 +30,14 @@ Now to push it to remote repo use
 git push -u
 After this your credentials will be asked give the credentials and you should see the upload happening
 ```
+
+Before you start working do 
+```
+git fetch
+```
+The above command will fetch all the changes which are not there in local repo
+
+```
+git reset --hard origin/<branch>
+```
+This will bring the git HEAD to the latest position
