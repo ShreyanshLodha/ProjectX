@@ -3090,11 +3090,7 @@ div#stacked-graph .label {
 .agileits_w3layouts_td,.w3_agileits_head1{
 	text-align:right;
 }
-/* @ShreyanshLodha */
-/* Custom Changes for project */
-.w3ls_header_top{
-	visibility: hidden;
-}
+
 /*-- start-responsive-design --*/
 @media (max-width:1440px){
 	.banner1, .banner2, .banner3, .banner4, .banner5 {
@@ -4171,3 +4167,14 @@ div#stacked-graph .label {
 		margin: 1em 0 0;
 	}
 }
+/* @ShreyanshLodha
+   Custom Changes according to requirments
+   ------Start------
+ */
+.w3ls_header_top{
+	visibility: hidden;
+}
+.agileits_search{
+	visibility: hidden;s
+}
+/* -------End------- */
