@@ -82,7 +82,7 @@ input[type="submit"],.agileinfo_chat a,.w3l_login_form_bottom1 a,.w3_customer_em
 	font-size: 1em;
     color: #212121;
     text-decoration: none;
-    background: url("{% static "../images/1.jpg" %}") no-repeat 0px 0px;
+    background: url(../images/1.jpg) no-repeat 0px 0px;
     height: 75px;
     display: block;
     padding-left: 3.8em;
