@@ -4,6 +4,7 @@ author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,19 +17,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="css/font-awesome.min.css" />
+<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" />
 <!-- //font-awesome icons -->
 <!-- js -->
-<script src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
+<script src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery.marquee.min.js" %}"></script>
 <!-- //js -->
 <link href="//fonts.googleapis.com/css?family=Muli:300,300i,400,400i" rel="stylesheet">
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="{% static "js/move-top.js " %}"></script>
+<script type="text/javascript" src="{% static "js/easing.js " %}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -317,7 +318,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				});
 			});
 		</script>
-		<script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+		<script src="{% static "js/jquery.bootstrap.newsbox.min.js" %}" type="text/javascript"></script>
 		<div class='agileinfo_marquee'>
 			<div data-speed="10" class="marquee">
 				<ul>
@@ -395,9 +396,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //footer -->
 <!-- stacked-graph -->
-	<script type="text/javascript" src="js/raphael.js"></script>
-    <script type="text/javascript" src="js/jquery.enumerable.js"></script>
-    <script type="text/javascript" src="js/jquery.tufte-graph.js"></script>
+	<script type="text/javascript" src="{% static "js/raphael.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.enumerable.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.tufte-graph.js" %}"></script>
 	 <script type="text/javascript">
       $(document).ready(function () {
 
@@ -433,7 +434,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 <!-- //script for marque -->
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 <script>
 $(document).ready(function(){
     $(".dropdown").hover(            
