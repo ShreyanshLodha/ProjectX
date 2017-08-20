@@ -8,8 +8,273 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style >
+	     /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+       {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #333;
+  font: 100%/1 "Helvetica Neue", Arial, sans-serif;
+}
+body {
+  
+  margin:0px;
+  font-family: 'Ubuntu', sans-serif;
+	background-size: 50% 50%;
+}
+h1, h2, h3, h4, h5, h6, a {
+  margin:0; padding:0;
+}
+.login {
+	</*background:url('images/Mpsg2b.jpg');*/
+  margin:0 auto;
+  max-width:500px;
+}
+.login-header {
+  color:#fff;
+  text-align:center;
+  font-size:300%;
+}
+/* .login-header h1 {
+   text-shadow: 0px 5px 15px #000; */
+}
+.login-form {
+  border:.5px solid #fff;
+  background:#4facff;
+  border-radius:10px;
+  box-shadow:0px 0px 10px #000;
+}
+.login-form h3 {
+  text-align:left;
+  margin-left:40px;
+  color:#fff;
+}
+.login-form {
+  box-sizing:border-box;
+  padding-top:15px;
+	padding-bottom:10%;
+  margin:5% auto;
+  text-align:center;
+}
+.login input[type="text"],
+.login input[type="password"] {
+  max-width:400px;
+	width: 80%;
+  line-height:3em;
+  font-family: 'Ubuntu', sans-serif;
+  margin:1em 2em;
+  border-radius:5px;
+  border:2px solid #f2f2f2;
+  outline:none;
+  padding-left:10px;
+}
+.login-form input[type="button"] {
+  height:30px;
+  width:100px;
+  background:#fff;
+  border:1px solid #f2f2f2;
+  border-radius:20px;
+  color: slategrey;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+}
+.sign-up{
+  color:#f2f2f2;
+  margin-left:-70%;
+  cursor:pointer;
+  text-decoration:underline;
+}
+.no-access {
+  color:#E86850;
+  margin:20px 0px 20px -57%;
+  text-decoration:underline;
+  cursor:pointer;
+}
+.try-again {
+  color:#f2f2f2;
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+/*Media Querie*/
+@media only screen and (min-width : 150px) and (max-width : 530px){
+  .login-form h3 {
+    text-align:center;
+    margin:0;
+  }
+  .sign-up, .no-access {
+    margin:10px 0;
+  }
+  .login-button {
+    margin-bottom:10px;
+  }
+}
+</*.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -10rem 0 0 -10rem;
+  width: 20rem;
+  height: 20rem;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.login:hover > .login-header, .login.focused > .login-header {
+  width: 2rem;
+}
+.login:hover > .login-header > .text, .login.focused > .login-header > .text {
+  font-size: 1rem;
+  transform: rotate(-90deg);
+}
+.login.loading > .login-header {
+  width: 20rem;
+}
+.login.loading > .login-header > .text {
+  display: none;
+}
+.login.loading > .login-header > .loader {
+  display: block;
+}
+
+.login-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 20rem;
+  height: 20rem;
+  background: orange;
+  transition: width 0.5s ease-in-out;
+}
+.login-header > .text {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 5rem;
+  text-align: center;
+  line-height: 20rem;
+  color: #fff;
+  transition: all 0.5s ease-in-out;
+}
+.login-header > .loader {
+  display: none;
+  position: absolute;
+  left: 5rem;
+  top: 5rem;
+  width: 10rem;
+  height: 10rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  animation: loading 2s linear infinite;
+}
+.login-header > .loader:after {
+  content: "";
+  position: absolute;
+  left: 4.5rem;
+  top: -0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background: #fff;
+  border-radius: 50%;
+  border-right: 2px solid orange;
+}
+.login-header > .loader:before {
+  content: "";
+  position: absolute;
+  left: 4rem;
+  top: -0.5rem;
+  width: 0;
+  height: 0;
+  border-right: 1rem solid #fff;
+  border-top: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid transparent;
+}
+
+@keyframes loading {
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.login-form {
+  margin: 0 0 0 2rem;
+  padding: 0.5rem;
+}
+
+.login-input {
+  display: block;
+  width: 100%;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  box-shadow: none;
+  border-color: #ccc;
+  border-width: 0 0 2px 0;
+}
+.login-input + .login-input {
+  margin: 10px 0 0;
+}
+.login-input:focus {
+  outline: none;
+  border-bottom-color: orange;
+}
+
+.login-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 5rem;
+  height: 5rem;
+  border: none;
+  background: orange;
+  border-radius: 50%;
+  font-size: 0;
+  border: 0.6rem solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+.login-btn:after {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 0.8rem;
+  width: 0;
+  height: 0;
+  border-left: 2.4rem solid #fff;
+  border-top: 1.2rem solid transparent;
+  border-bottom: 1.2rem solid transparent;
+  transition: border 0.3s ease-in-out 0s;
+}
+.login-btn:hover, .login-btn:focus, .login-btn:active {
+  background: #fff;
+  border-color: orange;
+  outline: none;
+}
+.login-btn:hover:after, .login-btn:focus:after, .login-btn:active:after {
+  border-left-color: orange;
+}*/
+</style>
 <title>Trade Market a Corporate Business Category Flat Bootstrap Responsive Website Template | Login :: w3layouts</title>
 <!-- for-mobile-apps -->
+ <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="{% static "css/loginstyle.css" %}">
+<!--<link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>-->
+
+
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Trade Market Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -30,6 +295,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="{% static "js/move-top.js" %}"></script>
 <script type="text/javascript" src="{% static "js/easing.js" %}"></script>
+
+
+<script type="text/javascript" src="{% static "js/loginjs.js" %}"></script>
+
+
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -330,53 +600,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 <!-- //banner-bottom -->
 <!-- login -->
-	<div class="login">
-		<div class="container">
-			<h3>Login</h3>
-			<form action="#" method="post">
-				<span class="input input--kuro">
-					<input class="input__field input__field--kuro kuro_w3" type="text" id="input-7" placeholder="" required="">
-					<label class="input__label input__label--kuro" for="input-7">
-						<span class="input__label-content input__label-content--kuro">Username</span>
-					</label>
-				</span>
-				<span class="input input--kuro">
-					<input class="input__field input__field--kuro kuro_w3" type="password" id="input-8" placeholder="" required="">
-					<label class="input__label input__label--kuro" for="input-8">
-						<span class="input__label-content input__label-content--kuro">Password</span>
-					</label>
-				</span>
-				<div class="agileinfo_remember">
-					<div class="agileinfo_remember_left">
-						<input type="checkbox" id="brand1" value="">
-						<label for="brand1"><span></span>Remember me</label>
-					</div>
-					<div class="agileinfo_remember_right">
-						<a href="#">Forgot Password?</a>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<input type="submit" value="Submit">
-			</form>
-			<div class="w3l_login_form_bottom">
-				<h4>(Or)<span>Share With</span></h4>
-				<div class="agileits_social_icons">
-					<ul> 
-						<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i><span class="text">Facebook</span></a></li>
-						<li class="w3ls_w3_twitter"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i><span class="text">Twitter</span></a></li>
-						<div class="clearfix"> </div>
-					</ul> 
-				</div>
-			</div>
-			<div class="w3l_login_form_bottom1">
+
+	
+<!--<head>
+  
+  <title>login form</title>
+ 
+</head>-->
+<div class="login">
+  <div class="login-header">
+    <h1>Login</h1>
+  </div>
+  <div class="login-form">
+
+    <h3>Username:</h3>
+    <input type="text" placeholder="Username"/><br>
+    <h3>Password:</h3>
+    <input type="password" placeholder="Password"/>
+    <br>
+    <input type="button" value="Login" class="login-button"/>
+    <br>
+    <a class="sign-up">Sign Up!</a>
+    <br>
+    <h6 class="no-access">Can't access your account?</h6>
+
+<div class="error-page">
+  <div class="try-again">Error: Try again?</div>
+    <div class="w3l_login_form_bottom1">
+
 				<h5>For New People</h5>
 				<a href="sign-up.html">Register Now!</a>
 			</div>
+    </div>
+
+<!--<div class="login">
+  <header class="login-header"><span class="text">LOGIN</span><span class="loader"></span></header>
+  <form class="login-form">
+    <input class="login-input" type="text" placeholder="Username"/>
+    <input class="login-input" type="password" placeholder="Password"/>
+    <button class="login-btn" type="submit">login</button>
+  </form>
+</div>-->
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="{% static "js/index.js"%}"></script>
+			
 		</div>
 	</div>
 <!-- //login -->
 <!-- footer -->
-<div class="footer">
+<div class="footer" style="bottom: 0px; position: fixed; width: 100%">
 	<div class="container">
 		<ul class="agileits_w3layouts_footer_info">
 			<li><a href="index.html">Home</a><i>|</i></li>
