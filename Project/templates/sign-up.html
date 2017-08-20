@@ -147,7 +147,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //navigation -->
 
 <div id="main-wrapper">
-
+<script type="text/javascript" src="{% static "js/validator.js" %}"></script>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 left-side">
@@ -157,6 +157,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</header>
 			</div>
 			<div class="col-md-6 right-side">
+				<form method="post" action="/home/" onsubmit="">
         <span class="input input--hoshi">
           <input class="input__field input__field--hoshi" type="text" id="name" />
           <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="name">
@@ -188,11 +189,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           </label>
         </span>
 				<div class="cta">
-					<button class="btn btn-primary pull-left">
+					<button class="btn btn-primary pull-left" type="submit" onclick="return validator();">
 						Sign-Up Now
 					</button>
 					<span><a href="#">I am already a member</a></span>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
