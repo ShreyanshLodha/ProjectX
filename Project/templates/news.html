@@ -4,6 +4,7 @@ author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,22 +17,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="css/font-awesome.min.css" />
+<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" />
 <!-- //font-awesome icons -->
 <!-- js -->
-<script src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
+<script src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery.marquee.min.js" %}"></script>
 <!-- //js -->
 <!-- small-graphs -->
-<script src="js/jquery.peity.js"></script>
+<script src="{% static "js/jquery.peity.js" %}"></script>
 <!-- //small-graphs -->
 <link href="//fonts.googleapis.com/css?family=Muli:300,300i,400,400i" rel="stylesheet">
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="{% static "js/move-top.js" %}"></script>
+<script type="text/javascript" src="{% static "js/easing.js" %}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -327,7 +328,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				});
 			});
 		</script>
-		<script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+		<script src="{% static "js/jquery.bootstrap.newsbox.min.js" %}" type="text/javascript"></script>
 		<div class='agileinfo_marquee'>
 			<div data-speed="10" class="marquee">
 				<ul>
@@ -412,23 +413,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<div class="w3_agileits_news_blog">
 						<div class="col-md-6 w3_agileits_news_blog1">
-							<img src="images/28.jpg" alt=" " class="img-responsive" />
+							<img src="{% static "images/28.jpg" %}" alt=" " class="img-responsive" />
 							<a href="single.html">FY17 revenue growth to be 10-12%, added 20 new clients: Infinite</a>
 							<p>In an interview to CNBC-TV18, Upinder Zutshi, MD &amp; CEO of Infinite Compute ..</p>
 						</div>
 						<div class="col-md-6 w3_agileits_news_blog1">
-							<img src="images/29.jpg" alt=" " class="img-responsive" />
+							<img src="{% static "images/29.jpg" %}"  alt=" " class="img-responsive" />
 							<a href="single.html">UPI-friendly apps to go live; users to have another option: NPCI</a>
 							<p>In the next 2-3 days banks will be uploading the UPI-enabled apps on Google ..</p>
 						</div>
 						<div class="clearfix"> </div>
 						<div class="col-md-6 w3_agileits_news_blog1">
-							<img src="images/30.jpg" alt=" " class="img-responsive" />
+							<img src="{% static "images/30.jpg" %}" alt=" " class="img-responsive" />
 							<a href="single.html">Tata Power's consumer base crosses 2 million mark across the Country</a>
 							<p>In FY 16, Tata Powers total consumer base in Mumbai increased to over 6.64 lakhs and its consumer base in Delhi in...</p>
 						</div>
 						<div class="col-md-6 w3_agileits_news_blog1">
-							<img src="images/31.jpg" alt=" " class="img-responsive" />
+							<img src="{% static "images/31.jpg" %}" alt=" " class="img-responsive" />
 							<a href="single.html">UCWeb launches New UC Browser and announces strategic partnership with Colors TV</a>
 							<p>The partnership with Colors TV for some of its shows is a reinforcement of the strategy of Alibaba Mobile Business...</p>
 						</div>
@@ -442,7 +443,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p>The benchmark S&amp;P BSE Sensex shed 54 points to end the day at 27,782. The 50-share gauge Nifty50 closed at 8,572, lower by 19 points.</p>
 							</div>
 							<div class="agileinfo_twi_grids_blog_right">
-								<img src="images/32.jpg" alt=" " class="img-responsive" />
+								<img src="{% static "images/32.jpg" %}" alt=" " class="img-responsive" />
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -453,7 +454,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p>The quarterly decline follows a 5.3 trillion yen loss in the fiscal year through March, the worst annual performance since the global financial crisis.</p>
 							</div>
 							<div class="agileinfo_twi_grids_blog_right">
-								<img src="images/33.jpg" alt=" " class="img-responsive" />
+								<img src="{% static "images/33.jpg" %}" alt=" " class="img-responsive" />
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -464,7 +465,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p>It is as important to gauge the performance of portfolio and fund manager, as much as the investment itself, since wrong investment can hurt future returns.</p>
 							</div>
 							<div class="agileinfo_twi_grids_blog_right">
-								<img src="images/34.jpg" alt=" " class="img-responsive" />
+								<img src="{% static "images/34.jpg" %}" alt=" " class="img-responsive" />
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -475,7 +476,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p>Bank of America joins strategists at UBS Securities LLC in warning investors to prepare for a mean reversion in volatility.</p>
 							</div>
 							<div class="agileinfo_twi_grids_blog_right">
-								<img src="images/35.jpg" alt=" " class="img-responsive" />
+								<img src="{% static "images/35.jpg" %}" alt=" " class="img-responsive" />
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -487,7 +488,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li class="news-item1">
 								<div class="w3_agile_news_market1">
 									<div class="w3_agile_news_market1_left">
-										<img src="images/24.jpg" alt=" " class="img-responsive" />
+										<img src="{% static "images/24.jpg" %}" alt=" " class="img-responsive" />
 									</div>
 									<div class="w3_agile_news_market1_right">
 										<a href="single.html">Gone for good: GST will push these taxes into oblivion</a>
@@ -499,7 +500,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li class="news-item1">
 								<div class="w3_agile_news_market1">
 									<div class="w3_agile_news_market1_left">
-										<img src="images/25.jpg" alt=" " class="img-responsive" />
+										<img src="{% static "images/25.jpg" %}" alt=" " class="img-responsive" />
 									</div>
 									<div class="w3_agile_news_market1_right">
 										<a href="single.html">Top of the pyramid: How the uber rich and mighty spend</a>
@@ -511,7 +512,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li class="news-item1">
 								<div class="w3_agile_news_market1">
 									<div class="w3_agile_news_market1_left">
-										<img src="images/26.jpg" alt=" " class="img-responsive" />
+										<img src="{% static "images/26.jpg" %}" alt=" " class="img-responsive" />
 									</div>
 									<div class="w3_agile_news_market1_right">
 										<a href="single.html">Low procurement rate may impact Railway projects: Titagarh</a>
@@ -523,7 +524,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li class="news-item1">
 								<div class="w3_agile_news_market1">
 									<div class="w3_agile_news_market1_left">
-										<img src="images/27.jpg" alt=" " class="img-responsive" />
+										<img src="{% static "images/27.jpg" %}" alt=" " class="img-responsive" />
 									</div>
 									<div class="w3_agile_news_market1_right">
 										<a href="single.html">Stalled payments relief likely for infrastructure cos</a>
@@ -549,7 +550,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								});
 							});
 						</script>
-						<script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+						<script src="{% static "js/jquery.bootstrap.newsbox.min.js" %}" type="text/javascript"></script>
 					</div>
 					<div class="agileits_w3layouts_top_gainers">
 						<div class="w3_agileits_gainers w3_agileits_top_losers">
@@ -662,7 +663,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</div>
 					<div class="wthree_news_market_quote">
-						<img src="images/2.png" alt=" " class="img-responsive" />
+						<img src="{% static "images/2.png" %}" alt=" " class="img-responsive" />
 						<div class="wthree_news_market_quote_pos">
 							<p>trade <span>market</span></p>
 						</div>
@@ -704,7 +705,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="col-md-3 agileinfo_news_original_grids_right">
 					<div class="w3layouts_add_market">
-						<img src="images/13.jpg" alt=" " class="img-responsive" />
+						<img src="{% static "images/13.jpg" %}" alt=" " class="img-responsive" />
 						<div class="w3layouts_add_market_pos">
 							<h3>pay demat dues online</h3>
 						</div>
@@ -829,7 +830,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 <!-- //script for marque -->
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 <script>
 $(document).ready(function(){
     $(".dropdown").hover(            

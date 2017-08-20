@@ -4,6 +4,7 @@ author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,22 +17,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="css/font-awesome.min.css" />
+<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" />
 <!-- //font-awesome icons -->
 <!-- js -->
-<script src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
+<script src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery.marquee.min.js" %}"></script>
 <!-- //js -->
 <!-- pop-up -->
-<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/popuo-box.css" %}" rel="stylesheet" type="text/css" media="all" />
 <!-- //pop-up -->
 <link href="//fonts.googleapis.com/css?family=Muli:300,300i,400,400i" rel="stylesheet">
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="{% static "js/move-top.js" %}"></script>
+<script type="text/javascript" src="{% static "js/easing.js" %}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -320,7 +321,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				});
 			});
 		</script>
-		<script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+		<script src="{% static "js/jquery.bootstrap.newsbox.min.js" %}" type="text/javascript"></script>
 		<div class='agileinfo_marquee'>
 			<div data-speed="10" class="marquee">
 				<ul>
@@ -339,7 +340,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="portfolio_grid1">
 						<a href="single.html"><h3>News</h3></a>
 						<p>27 August 2016</p>
-						<a href="single.html"><img src="images/29.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.html"><img src="{% static "images/29.jpg" %}" alt=" " class="img-responsive" /></a>
 						<div class="portfolio_grid1_anchor">
 							<a href="single.html">Top 20 chosen stocks of top 10 fund managers that gave up to 80% returns</a>
 						</div>
@@ -347,7 +348,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="portfolio_grid1">
 						<a href="single.html"><h3>News</h3></a>
 						<p>28 August 2016</p>
-						<a href="single.html"><img src="images/30.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.html"><img src="{% static "images/30.jpg" %}" alt=" " class="img-responsive" /></a>
 						<div class="portfolio_grid1_anchor">
 							<a href="single.html">Power Ministry plans to set up funds for stressed assets</a>
 						</div>
@@ -355,7 +356,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="portfolio_grid1">
 						<a href="single.html"><h3>News</h3></a>
 						<p>28 August 2016</p>
-						<a href="single.html"><img src="images/18.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.html"><img src="{% static "images/18.jpg" %}" alt=" " class="img-responsive" /></a>
 						<div class="portfolio_grid1_anchor">
 							<a href="single.html">Rs 10L crore in 60 days! Look which stocks made the most of the bull run</a>
 						</div>
@@ -363,7 +364,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="portfolio_grid1">
 						<a href="single.html"><h3>News</h3></a>
 						<p>29 August 2016</p>
-						<a href="single.html"><img src="images/31.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.html"><img src="{% static "images/31.jpg" %}" alt=" " class="img-responsive" /></a>
 						<div class="portfolio_grid1_anchor">
 							<a href="single.html">Protests outside Chinese embassy in London over Balochistan: How China is involved in the row</a>
 						</div>
@@ -371,7 +372,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="portfolio_grid1">
 						<a href="single.html"><h3>News</h3></a>
 						<p>31 August 2016</p>
-						<a href="single.html"><img src="images/44.jpg" alt=" " class="img-responsive" /></a>
+						<a href="single.html"><img src="{% static "images/44.jpg" %}" alt=" " class="img-responsive" /></a>
 						<div class="portfolio_grid1_anchor">
 							<a href="single.html">Finally, the BSE Sensex ended with a gain of 120 points at 27,902. The BSE Sensex opened at 27,827 touched an intra-day high of 27,953 and low of 27,699</a>
 						</div>
@@ -382,7 +383,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="portfolio_grid1">
 							<a href="single.html"><h3>News</h3></a>
 							<p>30 August 2016</p>
-							<a href="single.html"><img src="images/43.jpg" alt=" " class="img-responsive" /></a>
+							<a href="single.html"><img src="{% static "images/43.jpg" %}" alt=" " class="img-responsive" /></a>
 							<div class="portfolio_grid1_anchor">
 								<a href="single.html">Shares in Asia mixed as Tokyo jumps on yen, Shanghai down slightly</a>
 							</div>
@@ -390,7 +391,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="portfolio_grid1">
 							<a href="single.html"><h3>News</h3></a>
 							<p>30 August 2016</p>
-							<a href="single.html"><img src="images/28.jpg" alt=" " class="img-responsive" /></a>
+							<a href="single.html"><img src="{% static "images/28.jpg" %}" alt=" " class="img-responsive" /></a>
 							<div class="portfolio_grid1_anchor">
 								<a href="single.html">Hiving off one of units of Brazilian subsidiary: Shree Renuka</a>
 							</div>
@@ -398,7 +399,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="portfolio_grid1">
 							<a href="single.html"><h3>News</h3></a>
 							<p>31 August 2016</p>
-							<a href="single.html"><img src="images/25.jpg" alt=" " class="img-responsive" /></a>
+							<a href="single.html"><img src="{% static "images/25.jpg" %}" alt=" " class="img-responsive" /></a>
 							<div class="portfolio_grid1_anchor">
 								<a href="single.html">Expect to close FY17 with revenues of over Rs 1000cr: Sequent</a>
 							</div>
@@ -406,7 +407,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="portfolio_grid1">
 							<a href="single.html"><h3>News</h3></a>
 							<p>02 September 2016</p>
-							<a href="single.html"><img src="images/45.jpg" alt=" " class="img-responsive" /></a>
+							<a href="single.html"><img src="{% static "images/45.jpg" %}" alt=" " class="img-responsive" /></a>
 							<div class="portfolio_grid1_anchor">
 								<a href="single.html">Real Estate and Construction sector is expected to generate 75 million jobs by 2022: KPMG</a>
 							</div>
@@ -414,7 +415,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="portfolio_grid1">
 							<a href="single.html"><h3>News</h3></a>
 							<p>03 September 2016</p>
-							<a href="single.html"><img src="images/46.jpg" alt=" " class="img-responsive" /></a>
+							<a href="single.html"><img src="{% static "images/46.jpg" %}" alt=" " class="img-responsive" /></a>
 							<div class="portfolio_grid1_anchor">
 								<a href="single.html">European shares edge lower; Alstom rises on contract win</a>
 							</div>
@@ -424,7 +425,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="portfolio_grid1">
 							<a href="single.html"><h3>News</h3></a>
 							<p>03 September 2016</p>
-							<a href="single.html"><img src="images/46.jpg" alt=" " class="img-responsive" /></a>
+							<a href="single.html"><img src="{% static "images/46.jpg" %}" alt=" " class="img-responsive" /></a>
 							<div class="portfolio_grid1_anchor">
 								<a href="single.html">European shares edge lower; Alstom rises on contract win</a>
 							</div>
@@ -432,7 +433,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="portfolio_grid1">
 							<a href="single.html"><h3>News</h3></a>
 							<p>03 September 2016</p>
-							<a href="single.html"><img src="images/31.jpg" alt=" " class="img-responsive" /></a>
+							<a href="single.html"><img src="{% static "images/31.jpg" %}" alt=" " class="img-responsive" /></a>
 							<div class="portfolio_grid1_anchor">
 								<a href="single.html">Protests outside Chinese embassy in London over Balochistan: How China is involved in the row</a>
 							</div>
@@ -440,7 +441,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="portfolio_grid1">
 							<a href="single.html"><h3>News</h3></a>
 							<p>04 September 2016</p>
-							<a href="single.html"><img src="images/47.jpg" alt=" " class="img-responsive" /></a>
+							<a href="single.html"><img src="{% static "images/47.jpg" %}" alt=" " class="img-responsive" /></a>
 							<div class="portfolio_grid1_anchor">
 								<a href="single.html">Dollar at 3-week high, bonds and stocks sell off on hawkish Fed</a>
 							</div>
@@ -450,7 +451,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="col-md-3 agileinfo_news_original_grids_right agileinfo_portfolio_original_grids_right">
 					<div class="w3layouts_add_market">
-						<img src="images/13.jpg" alt=" " class="img-responsive" />
+						<img src="{% static "images/13.jpg" %}" alt=" " class="img-responsive" />
 						<div class="w3layouts_add_market_pos">
 							<h3>pay demat dues online</h3>
 						</div>
@@ -575,7 +576,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 <!-- //script for marque -->
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 <script>
 $(document).ready(function(){
     $(".dropdown").hover(            
