@@ -11,7 +11,7 @@ def contact(request):
     return render_to_response("contact.html")
 
 def equity(request):
-    return render_to_response("equity.hmtl")
+    return render_to_response("equity.html")
 
 def index(request):
     return render_to_response("index.html")
@@ -20,10 +20,10 @@ def login(request):
     return render_to_response("login.html")
 
 def news(request):
-    return render_to_response("news")
+    return render_to_response("news.html")
 
 def portfolio(request):
-    return render_to_response("portfolio")
+    return render_to_response("portfolio.html")
 
 def products(request):
     return render_to_response("products.html")

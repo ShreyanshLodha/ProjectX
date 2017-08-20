@@ -4,6 +4,7 @@ author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,19 +17,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />
 <!-- font-awesome icons -->
 <link rel="stylesheet" href="css/font-awesome.min.css" />
 <!-- //font-awesome icons -->
 <!-- js -->
-<script src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.marquee.min.js"></script>
+<script src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery.marquee.min.js" %}"></script>
 <!-- //js -->
 <link href="//fonts.googleapis.com/css?family=Muli:300,300i,400,400i" rel="stylesheet">
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="{% static "js/move-top.js" %}"></script>
+<script type="text/javascript" src="{% static "js/easing.js" %}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -124,17 +125,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<ul class="nav navbar-nav nav_1">
 							<li><a href="index.html">Home</a></li>
 							<li><a href="equity.html">Live Market Watch</a></li>
-							<li><a href="news.html">News</a></li>
-							<li><a href="products.html">Products</a></li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Short Codes<span class="caret"></span></a>
-								<div class="dropdown-menu w3ls_vegetables_menu">
-									<ul>
-										<li><a href="icons.html">Icons</a></li>
-										<li><a href="typography.html">Typography</a></li>
-									</ul>
-								</div>
-							</li>
+							<!-- <li><a href="news.html">News</a></li> -->
+							
 							<li><a href="service.html">Contact Us</a></li>
 						</ul>
 					</nav>
@@ -317,7 +309,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				});
 			});
 		</script>
-		<script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+		<script src="{% static "js/jquery.bootstrap.newsbox.min.js" %}" type="text/javascript"></script>
 		<div class='agileinfo_marquee'>
 			<div data-speed="10" class="marquee">
 				<ul>
@@ -377,7 +369,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="agileits_w3layouts_comments">
 							<p><span>Posted By :</span> <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Admin</a> &nbsp;&nbsp; <i class="fa fa-calendar" aria-hidden="true"></i> July 5, 2016 &nbsp;&nbsp; <a href="#"><i class="fa fa-comments" aria-hidden="true"></i> Comments (10)</a></p>
-							<img src="images/55.jpg" alt=" " class="img-responsive" />
+							<img src="{% static "images/55.jpg" %}" alt=" " class="img-responsive" />
 						</div>
 						<div class="agile_trade_figure_bottom">
 							<p>Integer rhoncus vestibulum lectus ac sodales. Vestibulum dapibus, 
@@ -440,7 +432,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="col-md-3 agileinfo_news_original_grids_right">
 					<div class="w3layouts_add_market">
-						<img src="images/13.jpg" alt=" " class="img-responsive" />
+						<img src="{% static "images/13.jpg" %}" alt=" " class="img-responsive" />
 						<div class="w3layouts_add_market_pos">
 							<h3>pay demat dues online</h3>
 						</div>
@@ -531,7 +523,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="agileinfo_chat">
 						<h3><i class="fa fa-comments-o" aria-hidden="true"></i>Chat</h3>
 						<div class="agileinfo_chat_left">
-							<img src="images/17.jpg" alt=" " class="img-responsive" />
+							<img src="{% static "images/17.jpg" %}" alt=" " class="img-responsive" />
 						</div>
 						<div class="agileinfo_chat_right">
 							<h4>Mark Allen</h4>
@@ -542,7 +534,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<a href="single.html"><span class="blink_me">Chat Now</span></a>
 					</div>
 					<div class="wthree_international">
-						<img src="images/18.jpg" alt=" " class="img-responsive" />
+						<img src="{% static "images/18.jpg" %}" alt=" " class="img-responsive" />
 						<div class="wthree_international_pos">
 							<p>international markets</p>
 						</div>
@@ -556,7 +548,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<p>Trade market offers you a choice of email alerts on your investments for FREE!</p>
 					</div>
 					<div class="w3_latest_stock">
-						<img src="images/19.jpg" alt=" " class="img-responsive" />
+						<img src="{% static "images/19.jpg" %}" alt=" " class="img-responsive" />
 						<div class="w3_latest_stock_pos">
 							<h3>latest <span>stock <i>market</i> updates</span></h3>
 						</div>
@@ -607,9 +599,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!-- //footer -->
 <!-- stacked-graph -->
-	<script type="text/javascript" src="js/raphael.js"></script>
-    <script type="text/javascript" src="js/jquery.enumerable.js"></script>
-    <script type="text/javascript" src="js/jquery.tufte-graph.js"></script>
+	<script type="text/javascript" src="{% static "js/raphael.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.enumerable.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.tufte-graph.js" %}"></script>
 	 <script type="text/javascript">
       $(document).ready(function () {
 
@@ -645,7 +637,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 <!-- //script for marque -->
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 <script>
 $(document).ready(function(){
     $(".dropdown").hover(            
