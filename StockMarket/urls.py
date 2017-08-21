@@ -24,17 +24,26 @@ urlpatterns = [
     url(r'^equity/', equity),
     url(r'^home/$', index),
     url(r'^home-registered/$',register_user),
-    url(r'^login/', login),
     url(r'^news/', news),
     url(r'^portfolio/', portfolio),
     url(r'^products/', products),
     url(r'^services/', services),
-    url(r'^signup/$', signup),
-    url(r'^signup-registered/$', signup),
     url(r'^single/', single),
     url(r'^sitemap/', sitemap),
     url(r'^dashboard/$',dashboard),
+    url(r'^auth/$', auth),
     url(r'^user/$',user),
     url(r'^past-transaction/$',pasttransaction),
+
+    # Login related URL
+    url(r'^login/$', login),
+    url(r'^login-required/$', login),
+    url(r'^login-wrong-password/$', login),
+
+
+    # Signup related URLs
+    url(r'^signup/$', signup),
+    url(r'^signup-registered/$', signup),
+    url(r'^signup-unregistered/$', signup),
 
 ]

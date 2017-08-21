@@ -157,16 +157,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</header>
 			</div>
 			<div class="col-md-6 right-side">
-            <span class="input input--hoshi" id="hidden-span" style="color:red;"> You are already a member. Proceed to login.</span>
+
+        <!--JS and HTML divs for validatation Starts-->
+        <div id="signup-registered">
+        <span class="input input--hoshi" style="color:red;">You are already a member. Proceed to login.</span>
+    </div>
     <script type="text/javascript">
+    var URL = window.location.href;
+    var result = URL.endsWith("/signup-registered/");
+    if (!result){
+        var div = document.getElementById("signup-registered");
+        console.log(div);
+        div.style.display = "none";
+    }
+	</script>
+
+	<div id="signup-unregistered">
+				<span class="input input--hoshi" style="color:red;">You are not registered. Sign-up first</span>
+	</div>
+	<script type="text/javascript">
         var URL = window.location.href;
-        var result = URL.endsWith("/signup-registered/");
+        var result = URL.endsWith("/signup-unregistered/");
         if (!result){
-            var div = document.getElementById("hidden-span");
+            var div = document.getElementById("signup-unregistered");
             console.log(div);
             div.style.display = "none";
         }
-    </script>
+	</script>
+	<!--JS and HTML divs for validatation Ends-->
 				<form method="post" action="/home-registered/" onsubmit="">
         <span class="input input--hoshi">
           <input class="input__field input__field--hoshi" type="text" id="name" name="name" />
