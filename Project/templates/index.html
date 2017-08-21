@@ -149,6 +149,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 <!-- //navigation -->
+<!-- Hidden message for registered users -->
+<div class="hidden-user-message" style="padding-bottom: 10px; padding-top: 10px; background-color: greenyellow;" id="hidden-div">
+	<div class="container">
+		<div class="row" >
+			<p align="center">You have been registered Successfully. Proceed to <a href="/login/">Login</a>.</p>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    var URL = window.location.href;
+    var result = URL.endsWith("/home-registered/");
+    console.log(result);
+    if (!result){
+        var div = document.getElementById("hidden-div");
+        console.log(div);
+        div.style.display = "none";
+    }
+</script>
+<!-- //Hidden message for registered users -->
 <!-- banner -->
 <div class="banner">
 	<section class="slider">

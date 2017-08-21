@@ -157,27 +157,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</header>
 			</div>
 			<div class="col-md-6 right-side">
-				<form method="post" action="/home/" onsubmit="">
+				<form method="post" action="/home-registered/" onsubmit="">
         <span class="input input--hoshi">
-          <input class="input__field input__field--hoshi" type="text" id="name" />
+          <input class="input__field input__field--hoshi" type="text" id="name" name="name" />
           <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="name">
             <span class="input__label-content input__label-content--hoshi">Name</span>
           </label>
         </span>
 				<span class="input input--hoshi">
-          <input class="input__field input__field--hoshi" type="text" id="email" />
+          <input class="input__field input__field--hoshi" type="text" id="email" name="email" />
           <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="email">
             <span class="input__label-content input__label-content--hoshi">E-mail</span>
           </label>
         </span>
 				<span class="input input--hoshi">
-          <input class="input__field input__field--hoshi" type="text" id="number" />
+          <input class="input__field input__field--hoshi" type="text" id="number" name="number" />
           <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="number">
             <span class="input__label-content input__label-content--hoshi">Phone Number</span>
           </label>
         </span>
 				<span class="input input--hoshi">
-          <input class="input__field input__field--hoshi" type="password" id="password" />
+          <input class="input__field input__field--hoshi" type="password" id="password"  name="password"/>
           <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="password">
             <span class="input__label-content input__label-content--hoshi">Password</span>
           </label>
@@ -192,7 +192,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<button class="btn btn-primary pull-left" type="submit" onclick="return validator();">
 						Sign-Up Now
 					</button>
-					<span><a href="#">I am already a member</a></span>
+					<span><a href="/login/">I am already a member</a></span>
 				</div>
 				</form>
 			</div>
