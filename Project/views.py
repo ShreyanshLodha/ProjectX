@@ -42,6 +42,15 @@ def single(request):
 def sitemap(request):
     return render_to_response("sitemap.html")
 
+def dashboard(request):
+    return render_to_response("dashboard.html")
+
+def user(request):
+    return render_to_response("user.html")
+
+def pasttransaction(request):
+    return render_to_response("pasttransaction.html")
+
 @csrf_exempt
 def register_user(request):
     if request.method == 'POST':
