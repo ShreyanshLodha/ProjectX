@@ -4,6 +4,7 @@ from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from Project.models import Customer,historical_data,shares,Transaction
+import hashlib
 
 # Create your views here.
 def about(request):
@@ -58,12 +59,13 @@ def register_user(request):
         email = str(request.POST['email'])
         number = int(request.POST['number'])
         password = str(request.POST['password'])
+        hashed_password = hashlib.md5(password)
         print(number)
         try :
             res = Customer.objects.get(email=email)
             return HttpResponseRedirect("/signup-registered/")
         except Customer.DoesNotExist:
-            user = Customer(name=name,email=email,password=password,phonenumber=number)
+            user = Customer(name=name,email=email,password=hashed_password,phonenumber=number)
             user.save()
             return render_to_response("index.html")
     else:
