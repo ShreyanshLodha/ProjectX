@@ -29,7 +29,8 @@ urlpatterns = [
     url(r'^portfolio/', portfolio),
     url(r'^products/', products),
     url(r'^services/', services),
-    url(r'^signup/', signup),
+    url(r'^signup/$', signup),
+    url(r'^signup-registered/$', signup),
     url(r'^single/', single),
     url(r'^sitemap/', sitemap),
 

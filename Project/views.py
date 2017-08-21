@@ -50,10 +50,12 @@ def register_user(request):
         number = int(request.POST['number'])
         password = str(request.POST['password'])
         print(number)
-
-        user = Customer(name=name,email=email,password=password,phonenumber=number)
-        user.save()
-
-        return render_to_response("index.html")
+        try :
+            res = Customer.objects.get(email=email)
+            return HttpResponseRedirect("/signup-registered/")
+        except Customer.DoesNotExist:
+            user = Customer(name=name,email=email,password=password,phonenumber=number)
+            user.save()
+            return render_to_response("index.html")
     else:
         return HttpResponseRedirect("/home/")
