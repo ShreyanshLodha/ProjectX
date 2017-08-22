@@ -1,4 +1,4 @@
-from django.shortcuts import render
+rom django.shortcuts import render
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
