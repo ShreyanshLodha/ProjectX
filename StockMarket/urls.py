@@ -31,7 +31,6 @@ urlpatterns = [
     url(r'^single/', single),
     url(r'^sitemap/', sitemap),
     url(r'^dashboard/$',dashboard),
-    url(r'^auth/$', auth),
     url(r'^user/$',user),
     url(r'^past-transaction/$',pasttransaction),
 
@@ -45,5 +44,8 @@ urlpatterns = [
     url(r'^signup/$', signup),
     url(r'^signup-registered/$', signup),
     url(r'^signup-unregistered/$', signup),
+
+    # logout
+    url(r'^logout/$', logout),
 
 ]
