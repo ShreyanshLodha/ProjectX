@@ -1,4 +1,4 @@
-rom django.shortcuts import render
+from django.shortcuts import render
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -20,6 +20,8 @@ def index(request):
     return render(request,"index.html")
 
 def login(request):
+    if 'user-trade' in request.COOKIES:
+        return HttpResponseRedirect("/dashboard/")
     return render(request,"login.html")
 
 def news(request):
@@ -45,7 +47,7 @@ def sitemap(request):
 
 @csrf_exempt
 def dashboard(request):
-    if 'user' in request.COOKIES:
+    if 'user-trade' in request.COOKIES:
         return render_to_response("dashboard.html")
     if request.method == 'POST':
         username = str(request.POST['username'])
@@ -57,7 +59,7 @@ def dashboard(request):
             obj = Customer.objects.filter(email=username,password=hashed_password.hexdigest())
             print(len(obj))
             if len(obj) == 1:
-                response.set_cookie('user',username)
+                response.set_cookie('user-trade',username)
                 return response
             else :
                 return HttpResponseRedirect("/login-wrong-password/")
@@ -68,14 +70,14 @@ def dashboard(request):
 
 
 def user(request):
-    if not 'user' in request.COOKIES:
-        print(request.COOKIES['user'])
+    if not 'user-trade' in request.COOKIES:
+        print(request.COOKIES['user-trade'])
         return HttpResponseRedirect("/login-required/")
     return render_to_response("user.html")
 
 def pasttransaction(request):
-    if not 'user' in request.COOKIES:
-        print(request.COOKIES['user'])
+    if not 'user-trade' in request.COOKIES:
+        print(request.COOKIES['user-trade'])
         return HttpResponseRedirect("/login-required/")
     return render_to_response("pasttransaction.html")
 
@@ -99,5 +101,5 @@ def register_user(request):
 
 def logout(request):
     response = HttpResponseRedirect('/home/')
-    response.delete_cookie('user')
+    response.delete_cookie('user-trade')
     return response

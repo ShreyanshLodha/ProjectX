@@ -6,7 +6,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 <style >
 	     /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
@@ -394,6 +394,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<!--<li><a href="/news/">News</a></li> -->
 							
 							<li><a href="/service/">Contact Us</a></li>
+							<li><a href="/signup/" id="user-register">Register</a> </li>
+							<li><a href="/login/" id="user-login">Login</a> </li>
 						</ul>
 					</nav>
 				</div>
@@ -402,7 +404,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 <!-- //navigation -->
-
+<script type="text/javascript" src="{% static "js/cookieChecker.js" %}" >
+</script>
 <!-- login -->
 
 	
@@ -424,7 +427,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     var result = URL.endsWith("/login-required/");
     if (!result){
         var div = document.getElementById("login-required");
-        console.log(div);
         div.style.display = "none";
     }
 </script>
@@ -441,7 +443,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     var result = URL.endsWith("/login-wrong-password/");
     if (!result){
         var div = document.getElementById("login-wrong-password");
-        console.log(div);
         div.style.display = "none";
     }
 </script>
