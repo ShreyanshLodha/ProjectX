@@ -157,6 +157,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</header>
 			</div>
 			<div class="col-md-6 right-side">
+
+        <!--JS and HTML divs for validatation Starts-->
+        <div id="signup-registered">
+        <span class="input input--hoshi" style="color:red;">You are already a member. Proceed to login.</span>
+    </div>
+    <script type="text/javascript">
+    var URL = window.location.href;
+    var result = URL.endsWith("/signup-registered/");
+    if (!result){
+        var div = document.getElementById("signup-registered");
+        console.log(div);
+        div.style.display = "none";
+    }
+	</script>
+
+	<div id="signup-unregistered">
+				<span class="input input--hoshi" style="color:red;">You are not registered. Sign-up first</span>
+	</div>
+	<script type="text/javascript">
+        var URL = window.location.href;
+        var result = URL.endsWith("/signup-unregistered/");
+        if (!result){
+            var div = document.getElementById("signup-unregistered");
+            console.log(div);
+            div.style.display = "none";
+        }
+	</script>
+	<!--JS and HTML divs for validatation Ends-->
 				<form method="post" action="/home-registered/" onsubmit="">
         <span class="input input--hoshi">
           <input class="input__field input__field--hoshi" type="text" id="name" name="name" />
@@ -192,11 +220,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<button class="btn btn-primary pull-left" type="submit" onclick="return validator();">
 						Sign-Up Now
 					</button>
-<<<<<<< HEAD
-					<span><a href="/#">I am already a member</a></span>
-=======
+
 					<span><a href="/login/">I am already a member</a></span>
->>>>>>> origin/master
 				</div>
 				</form>
 			</div>
@@ -256,7 +281,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <!-- //script for marque -->
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 <script>
     $(document).ready(function(){
         $(".dropdown").hover(

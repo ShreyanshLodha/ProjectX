@@ -1,9 +1,10 @@
-from django.shortcuts import render
+rom django.shortcuts import render
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from Project.models import Customer,historical_data,shares,Transaction
+import hashlib
 
 # Create your views here.
 def about(request):
@@ -42,6 +43,35 @@ def single(request):
 def sitemap(request):
     return render_to_response("sitemap.html")
 
+def dashboard(request):
+    return render_to_response("dashboard.html")
+
+@csrf_exempt
+def auth(request):
+    if request.method == 'POST':
+        username = str(request.POST['username'])
+        password = str(request.POST['password'])
+        hashed_password = hashlib.sha256(password.encode('utf-8'))
+
+        try :
+            res = Customer.objects.get(email=username)
+            obj = Customer.objects.filter(email=username,password=hashed_password.hexdigest())
+            print(len(obj))
+            if len(obj) == 1:
+                return HttpResponseRedirect("/dashboard/")
+            else :
+                return HttpResponseRedirect("/login-wrong-password/")
+        except Customer.DoesNotExist:
+            return HttpResponseRedirect("/signup-unregistered/")
+    else :
+        return HttpResponseRedirect("/login-required/")
+
+def user(request):
+    return render_to_response("user.html")
+
+def pasttransaction(request):
+    return render_to_response("pasttransaction.html")
+
 @csrf_exempt
 def register_user(request):
     if request.method == 'POST':
@@ -49,11 +79,15 @@ def register_user(request):
         email = str(request.POST['email'])
         number = int(request.POST['number'])
         password = str(request.POST['password'])
+        hashed_password = hashlib.sha256(password.encode('utf-8'))
+
         print(number)
-
-        user = Customer(name=name,email=email,password=password,phonenumber=number)
-        user.save()
-
-        return render_to_response("index.html")
+        try :
+            res = Customer.objects.get(email=email)
+            return HttpResponseRedirect("/signup-registered/")
+        except Customer.DoesNotExist:
+            user = Customer(name=name,email=email,password=hashed_password.hexdigest(),phonenumber=number)
+            user.save()
+            return render_to_response("index.html")
     else:
         return HttpResponseRedirect("/home/")

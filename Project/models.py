@@ -5,7 +5,7 @@ class Customer(models.Model):
    cid = models.AutoField(primary_key=True)
    name = models.CharField(max_length = 50,null=False)
    email = models.EmailField(max_length = 50,null=False)
-   password = models.CharField(max_length = 50,null=False)
+   password = models.CharField(max_length = 100,null=False)
    balance = models.FloatField(default='0')
    phonenumber = models.BigIntegerField(null=False)
 

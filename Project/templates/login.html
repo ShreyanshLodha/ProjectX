@@ -109,9 +109,6 @@ h1, h2, h3, h4, h5, h6, a {
   .sign-up, .no-access {
     margin:10px 0;
   }
-  .login-button {
-    margin-bottom:10px;
-  }
 }
 </*.login {
   position: absolute;
@@ -308,7 +305,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	});
 </script>
-<!-- start-smoth-scrolling -->
 </head>
 	
 <body>
@@ -415,32 +411,79 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <title>login form</title>
  
 </head>-->
+<!--JS and HTML divs for validatation Starts-->
+<div class="container" id="login-required" style="padding-bottom: 20px; padding-top: 20px; align-content: center;">
+	<div class="row">
+		<center>
+			<p  style="color:red;">Login to proceed to dashboard.</p>
+		</center>
+	</div>
+</div>
+<script type="text/javascript">
+    var URL = window.location.href;
+    var result = URL.endsWith("/login-required/");
+    if (!result){
+        var div = document.getElementById("login-required");
+        console.log(div);
+        div.style.display = "none";
+    }
+</script>
+
+<div class="container" id="login-wrong-password" style="padding-bottom: 20px; padding-top: 20px; align-content: center;">
+	<div class="row">
+		<center>
+			<p  style="color:red;">Entered Password is incorrect. Try again!</p>
+		</center>
+	</div>
+</div>
+<script type="text/javascript">
+    var URL = window.location.href;
+    var result = URL.endsWith("/login-wrong-password/");
+    if (!result){
+        var div = document.getElementById("login-wrong-password");
+        console.log(div);
+        div.style.display = "none";
+    }
+</script>
+<!--JS and HTML divs for validatation Ends-->
+
+<form action="/auth/" method="post">
 <div class="login">
   <div class="login-header">
     <h1>Login</h1>
   </div>
   <div class="login-form">
 
-    <h3>Username:</h3>
-    <input type="text" placeholder="Username"/><br>
-    <h3>Password:</h3>
-    <input type="password" placeholder="Password"/>
+    <h3>Email ID</h3>
+    <input type="text" placeholder="Username" name="username"/><br>
+    <h3>Password</h3>
+    <input type="password" placeholder="Password" name="password"/>
     <br>
-    <input type="button" value="Login" class="login-button"/>
-    <br>
-    <a class="sign-up">Sign Up!</a>
-    <br>
-    <h6 class="no-access">Can't access your account?</h6>
+    <input type="submit" value="Login" class="login-button"/>
+  </div>
+	<!--Force CSS Starts-->
+	<style type="text/css">
+		.login input[type="submit"] {
+			outline: none;
+			border: none;
+			background: #ff5000;
+			color: #fff;
+			padding: 11px 0;
+			font-size: 14px;
+			width: 42%;
+			text-transform: uppercase;
+			position: relative;
+		}
+	</style>
+	<!--//Force CSS Ends-->
+</div>
+</form>
 
-<div class="error-page">
-  <div class="try-again">Error: Try again?</div>
     <div class="w3l_login_form_bottom1">
-
 				<h5>For New People</h5>
 				<a href="/sign-up/">Register Now!</a>
 			</div>
     </div>
-
 <!--<div class="login">
   <header class="login-header"><span class="text">LOGIN</span><span class="loader"></span></header>
   <form class="login-form">
@@ -450,13 +493,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   </form>
 </div>-->
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="{% static "js//home.js"%}"></script>
+    <script src="{% static "js/index.js" %}"></script>
 			
 		</div>
 	</div>
 <!-- //login -->
 <!-- footer -->
-<div class="footer" style="bottom: 0px; position: fixed; width: 100%">
+<div class="footer" style="margin-top:20px;">
 	<div class="container">
 		<ul class="agileits_w3layouts_footer_info">
 			<li><a href="/home/">Home</a><i>|</i></li>
