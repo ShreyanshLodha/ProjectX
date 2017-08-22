@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http.request import HttpRequest
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.views.decorators.csrf import csrf_exempt
+from Project.models import Customer,historical_data,shares,Transaction
 
 # Create your views here.
 def about(request):
@@ -39,3 +41,19 @@ def single(request):
 
 def sitemap(request):
     return render_to_response("sitemap.html")
+
+@csrf_exempt
+def register_user(request):
+    if request.method == 'POST':
+        name = str(request.POST['name'])
+        email = str(request.POST['email'])
+        number = int(request.POST['number'])
+        password = str(request.POST['password'])
+        print(number)
+
+        user = Customer(name=name,email=email,password=password,phonenumber=number)
+        user.save()
+
+        return render_to_response("index.html")
+    else:
+        return HttpResponseRedirect("/home/")

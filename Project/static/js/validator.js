@@ -56,7 +56,7 @@ function validator() {
             "and lenght should be at least 6 ");
         return false;
     }
-    else if(EType == 6){
+    else if(EType == 5){
         alert("Passwords do not match, Retry!");
         return false;
     }

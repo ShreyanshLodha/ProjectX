@@ -17,10 +17,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 	<!-- //for-mobile-apps -->
-	<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
-	<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="/{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="/{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />
 	<!-- font-awesome icons -->
-	<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" />
+	<link rel="stylesheet" href="/{% static "css/font-awesome.min.css" %}" />
 	<!-- //font-awesome icons -->
 	<!-- js -->
 	<script src="{% static "js/jquery-1.11.1.min.js" %}"></script>
@@ -42,12 +42,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<title></title>
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="{% static "css/style-sign-up.css" %}">
-	<link rel="stylesheet" href="{% static "css/set1-sign-up.css" %}">
+	<link rel="stylesheet" href="/{% static "css/style-sign-up.css" %}">
+	<link rel="stylesheet" href="/{% static "css/set1-sign-up.css" %}">
 
 	<!--Google Fonts-->
-	<link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<link href='/https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+	<link href='/https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 	<link href="//fonts.googleapis.com/css?family=Muli:300,300i,400,400i" rel="stylesheet">
 </head>
 
@@ -61,11 +61,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<li class="w3layouts_header_list">
 						<ul>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Language<span class="caret"></span></a>
+								<a href="/#" class="dropdown-toggle" data-toggle="dropdown">Language<span class="caret"></span></a>
 								<div class="mega-dropdown-menu">
 									<ul class="dropdown-menu w3_dropdown">
-										<li><a href="#">English</a></li>
-										<li><a href="#">Hindi</a></li>
+										<li><a href="/#">English</a></li>
+										<li><a href="/#">Hindi</a></li>
 									</ul>
 								</div>
 							</li>
@@ -75,13 +75,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</ul>
 					</li>
 					<li class="w3layouts_header_list">
-						<a href="login.html">Login To Trade</a><i>|</i>
+						<a href="/login/">Login To Trade</a><i>|</i>
 					</li>
 					<li class="w3layouts_header_list">
-						<a href="faq.html">FAQ</a><i>|</i>
+						<a href="/faq/">FAQ</a><i>|</i>
 					</li>
 					<li class="w3layouts_header_list">
-						<a href="contact.html">Contact Us</a>
+						<a href="/contact/">Contact Us</a>
 					</li>
 				</ul>
 			</div>
@@ -94,7 +94,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="w3ls_header_middle">
 		<div class="container">
 			<div class="agileits_logo">
-				<h1><a href="index.html"><span>Trade</span> Market<i>Trade anytime anywhere</i></a></h1>
+				<h1><a href="/home/"><span>Trade</span> Market<i>Trade anytime anywhere</i></a></h1>
 			</div>
 			<div class="agileits_search">
 				<form action="#" method="post">
@@ -133,10 +133,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 				<nav class="wthree_nav">
 					<ul class="nav navbar-nav nav_1">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="equity.html">Live Market Watch</a></li>
-						<!-- <li><a href="news.html">News</a></li> -->
-						<li><a href="service.html">Contact Us</a></li>
+						<li><a href="/home/">Home</a></li>
+						<li><a href="/equity/">Live Market Watch</a></li>
+						<!-- <li><a href="/news/">News</a></li> -->
+						<li><a href="/service/">Contact Us</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -157,27 +157,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</header>
 			</div>
 			<div class="col-md-6 right-side">
-				<form method="post" action="/home/" onsubmit="">
+				<form method="post" action="/home-registered/" onsubmit="">
         <span class="input input--hoshi">
-          <input class="input__field input__field--hoshi" type="text" id="name" />
+          <input class="input__field input__field--hoshi" type="text" id="name" name="name" />
           <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="name">
             <span class="input__label-content input__label-content--hoshi">Name</span>
           </label>
         </span>
 				<span class="input input--hoshi">
-          <input class="input__field input__field--hoshi" type="text" id="email" />
+          <input class="input__field input__field--hoshi" type="text" id="email" name="email" />
           <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="email">
             <span class="input__label-content input__label-content--hoshi">E-mail</span>
           </label>
         </span>
 				<span class="input input--hoshi">
-          <input class="input__field input__field--hoshi" type="text" id="number" />
+          <input class="input__field input__field--hoshi" type="text" id="number" name="number" />
           <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="number">
             <span class="input__label-content input__label-content--hoshi">Phone Number</span>
           </label>
         </span>
 				<span class="input input--hoshi">
-          <input class="input__field input__field--hoshi" type="password" id="password" />
+          <input class="input__field input__field--hoshi" type="password" id="password"  name="password"/>
           <label class="input__label input__label--hoshi input__label--hoshi-color-3" for="password">
             <span class="input__label-content input__label-content--hoshi">Password</span>
           </label>
@@ -192,7 +192,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<button class="btn btn-primary pull-left" type="submit" onclick="return validator();">
 						Sign-Up Now
 					</button>
-					<span><a href="#">I am already a member</a></span>
+<<<<<<< HEAD
+					<span><a href="/#">I am already a member</a></span>
+=======
+					<span><a href="/login/">I am already a member</a></span>
+>>>>>>> origin/master
 				</div>
 				</form>
 			</div>
@@ -204,11 +208,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="footer">
 	<div class="container">
 		<ul class="agileits_w3layouts_footer_info">
-			<li><a href="index.html">Home</a><i>|</i></li>
-			<li><a href="news.html">Markets</a><i>|</i></li>
-			<li><a href="portfolio.html">portfolio</a><i>|</i></li>
-			<li><a href="about.html">About Us</a><i>|</i></li>
-			<li><a href="sitemap.html">sitemap</a></li>
+			<li><a href="/home/">Home</a><i>|</i></li>
+			<li><a href="/news/">Markets</a><i>|</i></li>
+			<li><a href="/portfolio/">portfolio</a><i>|</i></li>
+			<li><a href="/about/">About Us</a><i>|</i></li>
+			<li><a href="/sitemap/">sitemap</a></li>
 		</ul>
 	</div>
 </div>
@@ -227,11 +231,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 [[2.4, 0.9,  2.0], {label: '2015'}],
                 [[1.5, 2.6, 0.45], {label: '2016'}]
             ],
-            barLabel:  function(index) {
+            barLabel:  function(home) {
                 amount = ($(this[0]).sum() * 10000).toFixed(0);
                 return '$' + $.tufteBar.formatNumber(amount);
             },
-            axisLabel: function(index) { return this[1].label },
+            axisLabel: function(home) { return this[1].label },
             legend: {
                 data: ["Finance", "Metal", "Telecom"]
             }

@@ -2,13 +2,12 @@ from django.db import models
 
 # Create your models here.
 class Customer(models.Model):
-
    cid = models.AutoField(primary_key=True)
    name = models.CharField(max_length = 50,null=False)
    email = models.EmailField(max_length = 50,null=False)
    password = models.CharField(max_length = 50,null=False)
    balance = models.FloatField(default='0')
-   phonenumber = models.IntegerField(max_length = 10,null=False)
+   phonenumber = models.BigIntegerField(null=False)
 
 class shares(models.Model):
 	sid = models.AutoField(primary_key=True)
@@ -18,10 +17,10 @@ class shares(models.Model):
 
 class Transaction(models.Model):
 
-	t_id = models.AutoField(primary_key=True)
-	c_id = models.ForeignKey(Customer)
+	tid = models.AutoField(primary_key=True)
+	cid = models.ForeignKey(Customer)
 	quantity = models.IntegerField(null=False)
-	s_id = models.ForeignKey(shares)
+	sid = models.ForeignKey(shares)
 	impact = models.FloatField(null=False)
 	buyrate = models.FloatField(null=True)
 	sellrate = models.FloatField(null=True)
