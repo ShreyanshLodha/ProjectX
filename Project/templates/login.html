@@ -388,14 +388,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- Main Nav Bar START-->
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<nav class="wthree_nav">
-						<ul class="nav navbar-nav nav_1">
+						<!--@shreyanshLodha Style added to make sure the element stay at the other side of the page-->
+						<ul class="nav navbar-nav nav_1" style="width: 100%;">
 							<li><a href="/home/">Home</a></li>
 							<li><a href="/equity/">Live Market Watch</a></li>
 							<!--<li><a href="/news/">News</a></li> -->
 							
 							<li><a href="/service/">Contact Us</a></li>
-							<li><a href="/signup/" id="user-register">Register</a> </li>
-							<li><a href="/login/" id="user-login">Login</a> </li>
+							<!--@shreyanshLodha : 2 options in nav bar added Login and Registrations -->
+							<li style="float: right;"><a href="/signup/" id="user-register" >Register</a> </li>
+							<li style="float: right;"><a href="/login/" id="user-login">Login</a> </li>
+							<!--@shreyanshLodha-->
 						</ul>
 					</nav>
 				</div>
@@ -404,8 +407,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 <!-- //navigation -->
+<!-- @shreyanshLodha Added this script link to make sure Login and register can transformed to Logout and Dashboard-->
 <script type="text/javascript" src="{% static "js/cookieChecker.js" %}" >
 </script>
+<!-- @shreyanshLodha -->
 <!-- login -->
 
 	
