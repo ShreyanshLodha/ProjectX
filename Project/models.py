@@ -12,7 +12,7 @@ class Customer(models.Model):
 class shares(models.Model):
 	sid = models.AutoField(primary_key=True)
 	stock_code = models.CharField(max_length=50,null=False, default='')
-	stock_name = models.CharField(max_length = 50,null=False)
+	stock_name = models.CharField(max_length = 100,null=False)
 
 
 class Transaction(models.Model):

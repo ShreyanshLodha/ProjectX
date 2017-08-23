@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from Project.views import *
+import Project.PreviousData
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -49,3 +50,4 @@ urlpatterns = [
     url(r'^logout/$', logout),
 
 ]
+Project.PreviousData.dataFetcher()
