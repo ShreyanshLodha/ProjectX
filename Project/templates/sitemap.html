@@ -122,12 +122,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- Main Nav Bar START-->
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<nav class="wthree_nav">
-						<ul class="nav navbar-nav nav_1">
+						<ul class="nav navbar-nav nav_1" style="width: 100%;">
 							<li><a href="/home/">Home</a></li>
 							<li><a href="/equity/">Live Market Watch</a></li>
 							<!--<li><a href="/news/">News</a></li>-->
 							
 							<li><a href="/service/">Contact Us</a></li>
+							<li style="float: right;"><a href="/signup/" id="user-register" >Register</a> </li>
+						    <li style="float: right;"><a href="/login/" id="user-login">Login</a> </li>
 						</ul>
 					</nav>
 				</div>
@@ -137,7 +139,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 <!-- //navigation -->
-
+<script type="text/javascript" src="{% static "js/cookieChecker.js" %}" >
+</script>
 <!-- site-map -->
 	<div class="site-map">
 		<div class="container">
