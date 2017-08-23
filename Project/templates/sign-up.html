@@ -17,14 +17,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 	<!-- //for-mobile-apps -->
-	<link href="/{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
-	<link href="/{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static "css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all" />
 	<!-- font-awesome icons -->
-	<link rel="stylesheet" href="/{% static "css/font-awesome.min.css" %}" />
+	<link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" />
 	<!-- //font-awesome icons -->
 	<!-- js -->
-	<script src="{% static "js/jquery-1.11.1.min.js" %}"></script>
-	<script type="text/javascript" src="{% static "js/jquery.marquee.min.js" $}:></script>
+	<script src="{% static "js/jquery-1.11.1.min.js" %}" ></script>
+	<script type="text/javascript" src="{% static "js/jquery.marquee.min.js" %}"/>
 	<!-- //js -->
 	<!-- start-smoth-scrolling -->
 	<script type="text/javascript" src="{% static "js/move-top.js" %}"></script>
@@ -42,12 +42,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<title></title>
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="/{% static "css/style-sign-up.css" %}">
-	<link rel="stylesheet" href="/{% static "css/set1-sign-up.css" %}">
+	<link rel="stylesheet" href="{% static "css/style-sign-up.css" %}">
+	<link rel="stylesheet" href="{% static "css/set1-sign-up.css" %}">
 
 	<!--Google Fonts-->
-	<link href='/https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
-	<link href='/https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 	<link href="//fonts.googleapis.com/css?family=Muli:300,300i,400,400i" rel="stylesheet">
 </head>
 
@@ -167,7 +167,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     var result = URL.endsWith("/signup-registered/");
     if (!result){
         var div = document.getElementById("signup-registered");
-        console.log(div);
         div.style.display = "none";
     }
 	</script>
@@ -180,7 +179,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         var result = URL.endsWith("/signup-unregistered/");
         if (!result){
             var div = document.getElementById("signup-unregistered");
-            console.log(div);
             div.style.display = "none";
         }
 	</script>

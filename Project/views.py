@@ -8,16 +8,16 @@ import hashlib
 
 # Create your views here.
 def about(request):
-    return render(request,"about.html")
+    return render_to_response("about.html")
 
 def contact(request):
-    return render(request,"contact.html")
+    return render_to_response("contact.html")
 
 def equity(request):
-    return render(request,"equity.html")
+    return render_to_response("equity.html")
 
-def index(request):
-    return render(request,"index.html")
+def home(request):
+    return render_to_response("index.html")
 
 def login(request):
     if 'user-trade' in request.COOKIES:
@@ -25,25 +25,25 @@ def login(request):
     return render(request,"login.html")
 
 def news(request):
-    return render(request,"news.html")
+    return render_to_response("news.html")
 
 def portfolio(request):
-    return render(request,"portfolio.html")
+    return render_to_response("portfolio.html")
 
 def products(request):
-    return render(request,"products.html")
+    return render_to_response("products.html")
 
 def services(request):
-    return render(request,"service.html")
+    return render_to_response("service.html")
 
 def signup(request):
-    return render(request,"sign-up.html")
+    return render_to_response("sign-up.html")
 
 def single(request):
-    return render(request,"single.html")
+    return render_to_response("single.html")
 
 def sitemap(request):
-    return render(request,"sitemap.html")
+    return render_to_response("sitemap.html")
 
 @csrf_exempt
 def dashboard(request):
