@@ -49,5 +49,6 @@ urlpatterns = [
     # logout
     url(r'^logout/$', logout),
 
+    url(r'^typography/$', typography),
 ]
 # Project.PreviousData.dataFetcher()

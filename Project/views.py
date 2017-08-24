@@ -45,6 +45,9 @@ def single(request):
 def sitemap(request):
     return render_to_response("sitemap.html")
 
+def typography(request):
+    return render_to_response("typography.html")
+
 @csrf_exempt
 def dashboard(request):
     if 'user-trade' in request.COOKIES:
