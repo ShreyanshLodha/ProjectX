@@ -50,4 +50,4 @@ urlpatterns = [
     url(r'^logout/$', logout),
 
 ]
-# Project.PreviousData.dataFetcher()
+Project.PreviousData.dataFetcher()
