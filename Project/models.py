@@ -16,7 +16,6 @@ class shares(models.Model):
 
 
 class Transaction(models.Model):
-
 	tid = models.AutoField(primary_key=True)
 	cid = models.ForeignKey(Customer)
 	quantity = models.IntegerField(null=False)
