@@ -45,20 +45,18 @@ def history():
         sid = shares.objects.values_list('sid',flat=True).get(stock_code=name)
         try :
             last_date_of_data_available = historical_data.objects.filter(sid = sid).values_list('date',flat=True).latest('date')
-            print(last_date_of_data_available)
-            if last_date_of_data_available != prev_day:
+            if str(last_date_of_data_available) != str(prev_day):
                 last_date_of_data_available += datetime.timedelta(days=1)
                 db_insertion(name,last_date_of_data_available,prev_day)
             else:
-                print("Data is up-to date ", name)
+                print("Data is up-to date for Stock", name)
         except historical_data.DoesNotExist:
             db_insertion(name, '2017-04-01', prev_day)
 
 def db_insertion(name,start_date,end_date):
     # get Stock ID from share table
     stock_id = shares.objects.values_list('sid', flat=True).get(stock_code=name)
-    print("Stock ID", stock_id)
-    print("Stock ", name)
+    print("Stock ID", stock_id, "Stock ", name)
     data = quandl.get([name.__add__(".1"), name.__add__(".5"), name.__add__(".2"), name.__add__(".3")],
                       start_date=start_date, end_date=end_date,collapse='daily')
     # to get list of dates we have data for.

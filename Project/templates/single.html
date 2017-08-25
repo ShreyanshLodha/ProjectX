@@ -141,6 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="{% static "js/cookieChecker.js" %}" >
 </script>
 <!-- single -->
+<form action="/single/" method="post">
 	<div class="news-original">
 	<div class="container">
 		<div class="agileinfo_news_original_grids w3_agile_news_market_grids">
@@ -149,7 +150,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class = "row">
 						
 						<div class="col-sm-9">
-							<select class="form-control">
+							<select class="form-control" title="Shares">
 								<option value="1">select 1</option>
 								<option value="2">select 2</option>
 								<option value="3">select 3</option>
@@ -157,9 +158,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 											
 						<div class="col-sm-3">
-		<form action="/ /" method="post">
+
 							<input type="submit" class="btn btn-primary" value="Submit" style="width: 100%;"></input>
-		</form>
 						</div>
 					</div>
 					
@@ -177,19 +177,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<table class="table" >
 						<tbody>
 							<tr>
-							
-							<td class="type-info"><button type="button" class="btn btn-success" name="weekly" style="width:100%;">Last 7 Days</button> </td>
+								<td class="type-info"><input type="submit" class="btn btn-success" name="weekly" style="width:100%;" value="Last 7 days"></td>
 							</tr>
 							<tr>
-								<td class="type-info"><button type="button" class="btn btn-success" name="monthly" style="width:100%;">Last 30 Days</button></td>
+								<td class="type-info"><input type="submit" class="btn btn-success" name="monthly" style="width:100%;" value="Last 30 Days"></td>
 							</tr>
 							<tr>
-								<td class="type-info"><button type="button" class="btn btn-success" name="quarterly" style="width:100%;">Last 90 Days</button></td>
+								<td class="type-info"><input type="submit" class="btn btn-success" name="quarterly" style="width:100%;" value="Last 90 days"></td>
 							</tr>
 							<tr>
-								<td class="type-info"><button type="button" class="btn btn-success" name="1st april" style="width:100%;">From 1st April</button></td>
+								<td class="type-info"><input type="submit" class="btn btn-success" name="april" style="width:100%;" value="From 1st April"></button></td>
 							</tr>
-							
+
 						</tbody>
 						</table>
 						</div>	
@@ -227,7 +226,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 	</div>
-</div>	
+</div>
+</form>
 <!-- //single -->
 <!-- footer -->
 <div class="footer">
