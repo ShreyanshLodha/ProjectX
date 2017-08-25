@@ -47,9 +47,10 @@ def history():
             last_date_of_data_available = historical_data.objects.filter(sid = sid).values_list('date',flat=True).latest('date')
             print(last_date_of_data_available)
             if last_date_of_data_available != prev_day:
-                db_insertion(name,'2017-04-01',prev_day)
+                last_date_of_data_available += datetime.timedelta(days=1)
+                db_insertion(name,last_date_of_data_available,prev_day)
             else:
-                print("Not inserting data for " , name)
+                print("Data is up-to date ", name)
         except historical_data.DoesNotExist:
             db_insertion(name, '2017-04-01', prev_day)
 

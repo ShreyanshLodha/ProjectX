@@ -157,69 +157,70 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 											
 						<div class="col-sm-3">
-							<button type="submit" class="btn btn-primary" style="width: 200px; height: 33px;">submit</button> 
+		<form action="/ /" method="post">
+							<input type="submit" class="btn btn-primary" value="Submit" style="width: 100%;"></input>
+		</form>
 						</div>
 					</div>
 					
 				</div>
 			</div>
-			         
-	   
-					
+
 			<div class="container">	
 					<div class="row">
+    <hr />
 						<div class="col-sm-9">
 							<img class="img-responsive" src= "{% static "images/trade.jpg" %}" alt=" " class="img-responsive" style="width:50%; height:50%; padding-top:60px;">
 						</div>
-						
+
 						<div class="col-sm-3" style="padding-top:70px;">
 						<table class="table" >
 						<tbody>
 							<tr>
 							
-							<td class="type-info"><button type="button" class="btn btn-success" name="weekly" style="width:200px; height:33px;">Last 7 Days</button> </td>
+							<td class="type-info"><button type="button" class="btn btn-success" name="weekly" style="width:100%;">Last 7 Days</button> </td>
 							</tr>
 							<tr>
-								<td class="type-info"><button type="button" class="btn btn-success" name="monthly" style="width:200px; height:33px;">Last 30 Days</button></td>
+								<td class="type-info"><button type="button" class="btn btn-success" name="monthly" style="width:100%;">Last 30 Days</button></td>
 							</tr>
 							<tr>
-								<td class="type-info"><button type="button" class="btn btn-success" name="quarterly" style="width:200px; height:33px;">Last 90 Days</button></td>
+								<td class="type-info"><button type="button" class="btn btn-success" name="quarterly" style="width:100%;">Last 90 Days</button></td>
 							</tr>
 							<tr>
-								<td class="type-info"><button type="button" class="btn btn-success" name="1st april" style="width:200px; height:33px;">From 1st April</button></td>
+								<td class="type-info"><button type="button" class="btn btn-success" name="1st april" style="width:100%;">From 1st April</button></td>
 							</tr>
 							
 						</tbody>
 						</table>
 						</div>	
 					</div>
-					
+
 					<div class="row" style="padding-top:70px;">
+    					<hr />
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="usr">Highest Rate:</label>
-								<input type="text" name="Highest Rate" class="form-control" id="usr">
+								<label for="HRate">Highest Rate</label>
+								<input type="text" name="Highest Rate" class="form-control" id="HRate" readonly>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="DateH">Date of Highest Rate</label>
+								<input type="text" name="Dt_of_Highest_Rate" class="form-control" id="DateH" readonly>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+    							<label for="LRate">Lowest Rate</label>
+								<input type="text" name="Lowest Rate" class="form-control" id="LRate" readonly>
 							</div>
 						</div>
 						
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="usr">Lowest Rate:</label>
-								<input type="text" name="Lowest Rate" class="form-control" id="usr">
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="usr">Date of Highest Rate:</label>
-								<input type="text" name="Dt_of_Highest_Rate" class="form-control" id="usr">
-							</div>
-						</div>
-						
-						<div class="col-sm-3">
-							<div class="form-group">
-								<label for="usr">Date of Lowest Rate:</label>
-								<input type="text" name="Dt_of_Lowest_Rate" class="form-control" id="usr">
+								<label for="DateL">Date of Lowest Rate</label>
+								<input type="text" name="Dt_of_Lowest_Rate" class="form-control" id="DateL" readonly>
 							</div>
 						</div>
 						
