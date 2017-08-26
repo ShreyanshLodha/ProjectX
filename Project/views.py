@@ -4,7 +4,10 @@ from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from Project.models import Customer,historical_data,shares,Transaction
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import hashlib
+import os
 
 # Create your views here.
 def about(request):
@@ -40,8 +43,106 @@ def signup(request):
     return render_to_response("sign-up.html")
 @csrf_exempt
 def single(request):
-    
-    return render_to_response("single.html")
+    # Show data in drop down menu of the Page
+    stock_id = list(shares.objects.values_list('sid',flat=True))
+    stock_name = list(shares.objects.values_list('stock_name', flat=True))
+    stocks = {}
+    stocks['id'] = stock_id
+    stocks['names'] = stock_name
+    stocks['i'] = zip(stocks['id'], stocks['names'])
+
+
+    if request.method == "POST" and 'share' in request.POST:
+        selected_share = int(request.POST['share'])
+        price_list = []
+        date_list = []
+
+        duration = 0
+        original_dir = os.getcwd()
+        os.chdir('Project/static/images/')
+        if os._exists("graph.png"):
+            os.remove("graph.png")
+        os.chdir(original_dir)
+        # For 7 days
+        if 'days7' in request.POST:
+            duration = 7
+            price_list = list(historical_data.objects.values_list('close_price', flat=True).filter(sid_id=selected_share).order_by('-date')[:7])
+            price_list.reverse()
+            date_list = list(historical_data.objects.values_list('date', flat=True).filter(sid_id=selected_share).order_by('-date')[:7])
+            date_list.reverse()
+        elif 'days30' in request.POST:
+            duration = 30
+            price_list = list(historical_data.objects.values_list('close_price', flat=True).filter(sid_id=selected_share).order_by('-date')[:30])
+            price_list.reverse()
+            date_list = list(
+                historical_data.objects.values_list('date', flat=True).filter(sid_id=selected_share).order_by('-date')[
+                :30])
+            date_list.reverse()
+        elif 'days90' in request.POST:
+            duration = 90
+            price_list = list(historical_data.objects.values_list('close_price', flat=True).filter(sid_id=selected_share).order_by('-date')[:90])
+            price_list.reverse()
+            date_list = list(
+                historical_data.objects.values_list('date', flat=True).filter(sid_id=selected_share).order_by('-date')[
+                :90])
+            date_list.reverse()
+        else:
+            duration = 100
+            price_list = list(historical_data.objects.values_list('close_price', flat=True).filter(sid_id=selected_share).order_by('date'))
+            date_list = list(historical_data.objects.values_list('date', flat=True).filter(sid_id=selected_share).order_by('date'))
+
+        # to make sure the graph doesnt touch floor and ceil
+        max_price = max(price_list) + 10
+        min_price = min(price_list) - 10
+
+        # increase the size of the graph as we are displaying it on website
+        # plt.figure(figsize=(8.0, 5.0))
+
+        # set format of date on 'x' axis
+        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
+
+        # set 'x' axis ticks for according to the content size
+        if len(date_list) <= 30:
+            plt.gca().xaxis.set_major_locator(mdates.WeekdayLocator())
+        else:
+            plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
+            plt.gca().xaxis.set_minor_locator(mdates.WeekdayLocator())
+
+        # set fill and fill color according to the template color
+        plt.gca().fill_between(date_list,0,price_list,facecolors="#ff5000")
+        plt.plot(date_list,price_list, color='#000000')
+        plt.ylim(min_price,max_price)
+        plt.gcf().autofmt_xdate()
+
+        # Basic Enhancements to graph
+        plt.xlabel("Time")
+        plt.ylabel("Price")
+        plt.title(str(stock_name[selected_share-1]))
+
+        # save in static/image folder
+        os.chdir('Project/static/images/')
+        plt.savefig("graph.png")
+        os.chdir(original_dir)
+
+        # clean graph and close graph content
+        plt.clf()
+        # set 4 values required by content
+        max_value = max(price_list)
+        max_value_date = date_list[price_list.index(max(price_list))]
+        min_value = min(price_list)
+        min_value_date = date_list[price_list.index(min(price_list))]
+        stocks['max_value'] = max_value
+        stocks['max_value_date'] = max_value_date
+        stocks['min_value'] = min_value
+        stocks['min_value_date'] = min_value_date
+        response = render_to_response("single.html", stocks)
+        # set cookie
+        response.set_cookie('share-selected', selected_share)
+        response.set_cookie('share-duration', duration)
+        return response
+    else:
+        response = render_to_response("single.html", stocks)
+        return response
 
 def sitemap(request):
     return render_to_response("sitemap.html")
@@ -75,13 +176,11 @@ def dashboard(request):
 
 def user(request):
     if not 'user-trade' in request.COOKIES:
-        print(request.COOKIES['user-trade'])
         return HttpResponseRedirect("/login-required/")
     return render_to_response("user.html")
 
 def pasttransaction(request):
     if not 'user-trade' in request.COOKIES:
-        print(request.COOKIES['user-trade'])
         return HttpResponseRedirect("/login-required/")
     return render_to_response("pasttransaction.html")
 

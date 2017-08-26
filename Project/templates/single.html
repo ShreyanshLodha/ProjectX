@@ -38,7 +38,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	});
 </script>
-<!-- start-smoth-scrolling -->
+
 </head>
 	
 <body>
@@ -146,15 +146,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="container">
 		<div class="agileinfo_news_original_grids w3_agile_news_market_grids">
 			<div class= "form-group">
+
 				<div class="container">
 					<div class = "row">
-						
+
 						<div class="col-sm-9">
-							<select class="form-control" title="Shares">
-								<option value="1">select 1</option>
-								<option value="2">select 2</option>
-								<option value="3">select 3</option>
+							<select class="form-control" name="share">
+{% for id,names in i %}
+								<option value="{{id}}" id="{{id}}">{{names}}</option>
+{% endfor %}
 							</select>
+<!-- Script to retain the value of selected item in dropdown even after refresh (uses cookies)-->
+<script type="text/javascript">
+cookiearray = allcookies.split('; ');
+for(var i=0; i<cookiearray.length; i++) {
+    name = cookiearray[i].split('=')[0];
+    value = cookiearray[i].split('=')[1];
+    console.log(name);
+    if (name === 'share-selected') {
+        console.log("Found");
+        console.log(value);
+        document.getElementById(value).selected="selected";
+    }
+}
+</script>
+<!-- //Script to retain the value of selected item in dropdown even after refresh (uses cookies)-->
 						</div>
 											
 						<div class="col-sm-3">
@@ -166,27 +182,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 
-			<div class="container">	
+			<div class="container" id="news-original">
 					<div class="row">
     <hr />
 						<div class="col-sm-9">
-							<img class="img-responsive" src= "{% static "images/trade.jpg" %}" alt=" " class="img-responsive" style="width:50%; height:50%; padding-top:60px;">
+							<img class="img-responsive" src= "{% static "images/graph.png" %}" alt=" " class="img-responsive" style="width:streach;" >
 						</div>
 
 						<div class="col-sm-3" style="padding-top:70px;">
 						<table class="table" >
 						<tbody>
 							<tr>
-								<td class="type-info"><input type="submit" class="btn btn-success" name="weekly" style="width:100%;" value="Last 7 days"></td>
+								<td class="type-info"><input type="submit" class="btn btn-info" name="days7" id="days7" style="width:100%;" value="Last 7 days"></td>
 							</tr>
 							<tr>
-								<td class="type-info"><input type="submit" class="btn btn-success" name="monthly" style="width:100%;" value="Last 30 Days"></td>
+								<td class="type-info"><input type="submit" class="btn btn-info" name="days30" id="days30" style="width:100%;" value="Last 30 Days"></td>
 							</tr>
 							<tr>
-								<td class="type-info"><input type="submit" class="btn btn-success" name="quarterly" style="width:100%;" value="Last 90 days"></td>
+								<td class="type-info"><input type="submit" class="btn btn-info" name="days90" id="days90" style="width:100%;" value="Last 90 days"></td>
 							</tr>
 							<tr>
-								<td class="type-info"><input type="submit" class="btn btn-success" name="april" style="width:100%;" value="From 1st April"></button></td>
+								<td class="type-info"><input type="submit" class="btn btn-info" name="april" id="april" style="width:100%;" value="From 1st April"></button></td>
 							</tr>
 
 						</tbody>
@@ -199,27 +215,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="col-sm-3">
 							<div class="form-group">
 								<label for="HRate">Highest Rate</label>
-								<input type="text" name="Highest Rate" class="form-control" id="HRate" readonly>
+								<input type="text" name="Highest Rate" class="form-control" id="HRate" value="{{max_value}}" readonly>
 							</div>
 						</div>
 
 						<div class="col-sm-3">
 							<div class="form-group">
 								<label for="DateH">Date of Highest Rate</label>
-								<input type="text" name="Dt_of_Highest_Rate" class="form-control" id="DateH" readonly>
+								<input type="text" name="Dt_of_Highest_Rate" class="form-control" id="DateH" value="{{max_value_date}}" readonly>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
     							<label for="LRate">Lowest Rate</label>
-								<input type="text" name="Lowest Rate" class="form-control" id="LRate" readonly>
+								<input type="text" name="Lowest Rate" class="form-control" id="LRate" value="{{min_value}}" readonly>
 							</div>
 						</div>
 						
 						<div class="col-sm-3">
 							<div class="form-group">
 								<label for="DateL">Date of Lowest Rate</label>
-								<input type="text" name="Dt_of_Lowest_Rate" class="form-control" id="DateL" readonly>
+								<input type="text" name="Dt_of_Lowest_Rate" class="form-control" id="DateL" value="{{min_value_date}}" readonly>
 							</div>
 						</div>
 						
@@ -230,7 +246,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </form>
 <!-- //single -->
 <!-- footer -->
-<div class="footer">
+<div class="footer" id="footer">
 	<div class="container">
 		<ul class="agileits_w3layouts_footer_info">
 			<li><a href="/home/">Home</a><i>|</i></li>
@@ -242,6 +258,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 <!-- //footer -->
+<!-- Custom script to disable div if cookie 'share-selected' does not exist-->
+<script type="text/javascript">
+    cookiearray = allcookies.split('; ');
+    var flag = 0;
+    var time = 0;
+    for(var i=0; i<cookiearray.length; i++) {
+        name = cookiearray[i].split('=')[0];
+        value = cookiearray[i].split('=')[1];
+        if(name === 'share-selected')
+            flag = 1;
+        if(name === 'share-duration')
+            time = value;
+    }
+    if (flag===0){
+        document.getElementById('news-original').style.display= "none";
+        document.getElementById("footer").style.position="fixed";
+        document.getElementById("footer").style.width="100%";
+        document.getElementById("footer").style.bottom="0";
+    }
+    console.log(time);
+	if(time==30){
+        document.getElementById('days30').className="btn btn-success";
+	}
+	else if(time==90){
+        document.getElementById('days90').className="btn btn-success";
+	}
+	else if(time==100){
+        document.getElementById('april').className="btn btn-success";
+	}
+	else{
+        document.getElementById('days7').className="btn btn-success";
+	}
+</script>
+<!-- //Custom script to disable div if cookie 'stock-selected' does not exist-->
 <!-- stacked-graph -->
 	<script type="text/javascript" src="{% static "js/raphael.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery.enumerable.js" %}"></script>
