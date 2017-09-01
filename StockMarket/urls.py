@@ -51,4 +51,4 @@ urlpatterns = [
 
     url(r'^typography/$', typography),
 ]
-# Project.PreviousData.dataFetcher()
+Project.PreviousData.dataFetcher()

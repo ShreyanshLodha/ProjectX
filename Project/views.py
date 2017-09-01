@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from django.http.request import HttpRequest
 from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
-from Project.models import Customer,historical_data,shares,Transaction
+from Project.models import customer,historical_data,shares,buy_transaction,sell_transaction
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import hashlib
@@ -94,6 +93,8 @@ def single(request):
         # to make sure the graph doesnt touch floor and ceil
         max_price = max(price_list) + 10
         min_price = min(price_list) - 10
+        print(len(price_list))
+        print(len(date_list))
 
         # increase the size of the graph as we are displaying it on website
         # plt.figure(figsize=(8.0, 5.0))
@@ -102,7 +103,7 @@ def single(request):
         plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
 
         # set 'x' axis ticks for according to the content size
-        if len(date_list) <= 30:
+        if len(date_list) <= 29:
             plt.gca().xaxis.set_major_locator(mdates.WeekdayLocator())
         else:
             plt.gca().xaxis.set_major_locator(mdates.MonthLocator())

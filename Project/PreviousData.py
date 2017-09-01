@@ -28,12 +28,15 @@ def apiMaker(rows):
     temp_list = rows[0].split(',')
     d = {
         'stock_code' : temp_list[0],
-        'stock_name' : temp_list[1]
+        'stock_name' : temp_list[1],
+        'ceo' : temp_list[2],
+        'desc' : temp_list[3]
     }
+    print(d)
     try:
         obj = shares.objects.get(stock_code=d['stock_code'])
     except shares.DoesNotExist:
-        create = shares(stock_code=d['stock_code'], stock_name=d['stock_name'])
+        create = shares(stock_code=d['stock_code'], stock_name=d['stock_name'], ceo_name=d['ceo'], comp_desc=d['desc'])
         create.save()
     stock_list.append(d.copy())
 

@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Customer(models.Model):
+class customer(models.Model):
    cid = models.AutoField(primary_key=True)
    name = models.CharField(max_length = 50,null=False)
    email = models.EmailField(max_length = 50,null=False)
@@ -16,17 +16,21 @@ class shares(models.Model):
 	ceo_name = models.CharField(max_length = 100,null=False,default='')
 	comp_desc = models.TextField(null=False,default='')
 
-
-class Transaction(models.Model):
-	tid = models.AutoField(primary_key=True)
-	cid = models.ForeignKey(Customer)
+class buy_transaction(models.Model):
+	b_tid = models.AutoField(primary_key=True)
+	cid = models.ForeignKey(customer)
 	quantity = models.IntegerField(null=False)
 	sid = models.ForeignKey(shares)
 	impact = models.FloatField(null=False)
 	buyrate = models.FloatField(null=True)
+
+class sell_transaction(models.Model):
+	s_tid = models.AutoField(primary_key=True)
+	cid = models.ForeignKey(customer)
+	quantity = models.IntegerField(null=False)
+	sid = models.ForeignKey(shares)
+	impact = models.FloatField(null=False)
 	sellrate = models.FloatField(null=True)
-
-
 
 class historical_data(models.Model):
 	sid = models.ForeignKey(shares)
