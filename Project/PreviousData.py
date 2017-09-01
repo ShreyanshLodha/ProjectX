@@ -32,7 +32,6 @@ def apiMaker(rows):
         'ceo' : temp_list[2],
         'desc' : temp_list[3]
     }
-    print(d)
     try:
         obj = shares.objects.get(stock_code=d['stock_code'])
     except shares.DoesNotExist:

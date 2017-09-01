@@ -91,10 +91,9 @@ def single(request):
             date_list = list(historical_data.objects.values_list('date', flat=True).filter(sid_id=selected_share).order_by('date'))
 
         # to make sure the graph doesnt touch floor and ceil
-        max_price = max(price_list) + 10
-        min_price = min(price_list) - 10
-        print(len(price_list))
-        print(len(date_list))
+        max_price = max(price_list) + 5
+        min_price = min(price_list) - 5
+
 
         # increase the size of the graph as we are displaying it on website
         # plt.figure(figsize=(8.0, 5.0))
