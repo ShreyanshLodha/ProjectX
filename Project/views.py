@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import hashlib
 import os
+from django.core.cache import cache
 
 # Create your views here.
 def about(request):
@@ -42,12 +43,20 @@ def signup(request):
     return render_to_response("sign-up.html")
 @csrf_exempt
 def single(request):
+    # Delete old graph
+    original_dir = os.getcwd()
+    os.chdir('Project/static/images/')
+    if os._exists("graph.png"):
+        os.remove("graph.png")
+    os.chdir(original_dir)
+
     # Show data in drop down menu of the Page
     stock_id = list(shares.objects.values_list('sid',flat=True))
     stock_name = list(shares.objects.values_list('stock_name', flat=True))
     stocks = {}
     stocks['id'] = stock_id
     stocks['names'] = stock_name
+
     stocks['i'] = zip(stocks['id'], stocks['names'])
 
 
@@ -55,13 +64,10 @@ def single(request):
         selected_share = int(request.POST['share'])
         price_list = []
         date_list = []
-
+        stock_basic = (shares.objects.values_list('ceo_name','comp_desc').get(sid=selected_share))
+        stock_CEO = stock_basic[0]
+        stock_desc = stock_basic[1]
         duration = 0
-        original_dir = os.getcwd()
-        os.chdir('Project/static/images/')
-        if os._exists("graph.png"):
-            os.remove("graph.png")
-        os.chdir(original_dir)
         # For 7 days
         if 'days7' in request.POST:
             duration = 7
@@ -135,6 +141,8 @@ def single(request):
         stocks['max_value_date'] = max_value_date
         stocks['min_value'] = min_value
         stocks['min_value_date'] = min_value_date
+        stocks['CEO'] = stock_CEO
+        stocks['desc'] = stock_desc
         response = render_to_response("single.html", stocks)
         # set cookie
         response.set_cookie('share-selected', selected_share)
@@ -160,15 +168,15 @@ def dashboard(request):
         hashed_password = hashlib.sha256(password.encode('utf-8'))
         response = HttpResponseRedirect("/dashboard/")
         try :
-            res = Customer.objects.get(email=username)
-            obj = Customer.objects.filter(email=username,password=hashed_password.hexdigest())
+            res = customer.objects.get(email=username)
+            obj = customer.objects.filter(email=username,password=hashed_password.hexdigest())
             print(len(obj))
             if len(obj) == 1:
                 response.set_cookie('user-trade',username)
                 return response
-            else :
+            else:
                 return HttpResponseRedirect("/login-wrong-password/")
-        except Customer.DoesNotExist:
+        except customer.DoesNotExist:
             return HttpResponseRedirect("/signup-unregistered/")
     else:
         return HttpResponseRedirect("/login-required/")
@@ -193,10 +201,10 @@ def register_user(request):
         password = str(request.POST['password'])
         hashed_password = hashlib.sha256(password.encode('utf-8'))
         try :
-            res = Customer.objects.get(email=email)
+            res = customer.objects.get(email=email)
             return HttpResponseRedirect("/signup-registered/")
-        except Customer.DoesNotExist:
-            user = Customer(name=name,email=email,password=hashed_password.hexdigest(),phonenumber=number)
+        except customer.DoesNotExist:
+            user = customer(name=name,email=email,password=hashed_password.hexdigest(),phonenumber=number)
             user.save()
             return render(request,"index.html")
     else:
