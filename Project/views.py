@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import hashlib
 import os
-from django.core.cache import cache
+import Project.LiveData
 
 # Create your views here.
 def about(request):
@@ -17,7 +17,8 @@ def contact(request):
     return render_to_response("contact.html")
 
 def equity(request):
-    return render_to_response("equity.html")
+    data = Project.LiveData.get_data_csv()
+    return render_to_response("equity.html", {'data' : data})
 
 def home(request):
     return render_to_response("index.html")

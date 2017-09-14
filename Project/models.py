@@ -11,6 +11,7 @@ class customer(models.Model):
 
 class shares(models.Model):
 	sid = models.AutoField(primary_key=True)
+	google_id=models.IntegerField(null=False)
 	stock_code = models.CharField(max_length=50,null=False, default='')
 	stock_name = models.CharField(max_length = 100,null=False)
 	ceo_name = models.CharField(max_length = 100,null=False,default='')
