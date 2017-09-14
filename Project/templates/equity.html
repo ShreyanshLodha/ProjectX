@@ -145,6 +145,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 			<div class="row">
 			<div class="col-md-12">
+		{% if data %}
 				<table class="table table-bordered table-hover">
 					<thead>
 					<tr>
@@ -156,14 +157,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</tr>
 					</thead>
 					<tbody>
-{% if data %}
+
 {% for items in data %}
 					<tr>
 						<td><a tabindex="-1" href="#">{{ items.2 }}</a></td>
-						<td>{{ items.6 }}</td>
-						<td>{{ items.7 }}</td>
-						<td>{{ items.9 }} %</td>
-						<td>{%if items.11 %}
+						<td class="color-changer-{{ forloop.counter }}"><strong>{{ items.6 }}</strong></td>
+						<td class="color-changer-{{ forloop.counter }}" id = {{ forloop.counter }}>{{ items.7 }}</td>
+						<td class="color-changer-{{ forloop.counter }}">{{ items.9 }} %</td>
+						<td class="color-changer-{{ forloop.counter }}">{% if items.11 %}
 {{ items.11 }}
 						{% else %}
 NaN
@@ -171,13 +172,27 @@ NaN
 						</td>
 					</tr>
 {% endfor %}
-{% else %}
-<p>Sorry</p>
-{% endif %}
+
 					</tbody>
 				</table>
-					
-						
+{% else %}
+<p>Sorry Data not available</p>
+{% endif %}
+						<script>
+	for (i = 1; i<=50; i++){
+						    var temp = document.getElementById(i);
+						    temp = (temp.innerText).toString();
+							if (temp.includes('-')){
+							    Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.backgroundColor = "#E74C3C");
+								Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.color = "#FFFFFF");
+							}
+							else{
+							    Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.backgroundColor = "#2ECC71");
+							    Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.color = "#FFFFFF");
+							}
+
+	}
+	</script>
 				</div>
 			</div>
 		</div>
@@ -201,40 +216,7 @@ NaN
 	<script type="text/javascript" src="{% static "js/raphael.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery.enumerable.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery.tufte-graph.js" %}"></script>
-	 <script type="text/javascript">
-      $(document).ready(function () {
-
-        jQuery('#stacked-graph').tufteBar({
-          data: [
-            [[1.5, 1.0, 0.51], {label: '2013'}],
-            [[2.0, 1.03, 0.6], {label: '2014'}],
-            [[2.4, 0.9,  2.0], {label: '2015'}],
-            [[1.5, 2.6, 0.45], {label: '2016'}]
-          ],
-          barLabel:  function(index) {
-            amount = ($(this[0]).sum() * 10000).toFixed(0);
-            return '$' + $.tufteBar.formatNumber(amount);
-          },
-          axisLabel: function(index) { return this[1].label },
-          legend: {
-            data: ["Finance", "Metal", "Telecom"]
-          }
-        });
-      });
-    </script>
 <!-- //stacked-graph -->
-<!-- script for marque -->
-	<script>
-	  $('.marquee').marquee({
-		gap: 100,
-		delayBeforeStart: 0,
-		direction: 'left',
-		duplicated: true,
-		pauseOnHover: true
-	});
-	</script>
-	
-<!-- //script for marque -->
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script>
