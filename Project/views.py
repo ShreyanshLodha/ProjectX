@@ -193,7 +193,12 @@ def dashboard(request):
 def user(request):
     if 'user-trade' not in request.COOKIES and 'email' not in request.session:
         return HttpResponseRedirect("/login-required/")
-    return render_to_response("user.html")
+
+    username = request.session['email']
+    details = list(customer.objects.values_list().filter(email=username))[0]
+    details = list(details)
+    print(details)
+    return render_to_response("user.html", {'details': details})
 
 def pasttransaction(request):
     if 'user-trade' not in request.COOKIES and 'email' not in request.session:
