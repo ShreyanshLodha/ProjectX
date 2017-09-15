@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Trade Market Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+<meta name="keywords" content="Trade Market Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -32,7 +32,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="{% static "js/easing.js" %}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
+		$(".scroll").click(function(event){
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 <!-- start-smoth-scrolling -->
 </head>
-	
+
 <body>
 <!-- header -->
 	<div class="header">
@@ -54,10 +54,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Language<span class="caret"></span></a>
 									<div class="mega-dropdown-menu">
 										<ul class="dropdown-menu w3_dropdown">
-											<li><a href="#">English</a></li> 
+											<li><a href="#">English</a></li>
 											<li><a href="#">Hindi</a></li>
-										</ul>              
-									</div>	
+										</ul>
+									</div>
 								</li>
 								<li>
 									<i>|</i>
@@ -126,7 +126,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href="/home/">Home</a></li>
 							<li><a href="/equity/">Live Market Watch</a></li>
 							<!--li><a href="news/">News</a></li> -->
-							
+
 							<li><a href="/service/">Contact Us</a></li>
 							<li style="float: right;"><a href="/signup/" id="user-register" >Register</a> </li>
 						    <li style="float: right;"><a href="/login/" id="user-login">Login</a> </li>
@@ -144,63 +144,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="equity">
 		<div class="container">
 			<div class="row">
+        <center>
 			<div class="col-md-12">
-		{% if data %}
-				<table class="table table-bordered table-hover">
-					<thead>
-					<tr>
-						<th>Stock Name</th>
-						<th>Current Price</th>
-						<th>Change</th>
-						<th>Change(%)</th>
-						<th>Earning per Share</th>
-					</tr>
-					</thead>
-					<tbody>
-
-{% for items in data %}
-					<tr>
-						<td><strong><a tabindex="-1" href="#">{{ items.2 }}</a><strong></td>
-						<td class="color-changer-{{ forloop.counter }}"><strong>{{ items.6 }}</strong></td>
-						<td class="color-changer-{{ forloop.counter }}" id = {{ forloop.counter }}><strong>{{ items.7 }}</strong></td>
-						<td class="color-changer-{{ forloop.counter }}">{{ items.9 }} %</td>
-						<td>{% if items.11 %}
-{{ items.11 }}
-						{% else %}
-NaN
-{% endif %}
-						</td>
-					</tr>
-{% endfor %}
-
-					</tbody>
-				</table>
-{% else %}
-<p>Sorry Data not available</p>
-{% endif %}
-						<script>
-	for (i = 1; i<=50; i++){
-						    var temp = document.getElementById(i);
-						    temp = (temp.innerText).toString();
-							if (temp.includes('-')){
-							    //Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.backgroundColor = "#CB4335");
-								Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.color = "#B03A2E");
-							}
-							else{
-							    //Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.backgroundColor = "#229954");
-							    Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.color = "#1E8449");
-							}
-
-	}
-	</script>
-				</div>
-			</div>
-		</div>
-			<div class="clearfix"> </div>
-	</div>
-<!-- //equity -->
+                <h2>Two Step Validation</h2>
+    <br><br><br>
+                <p>Enter the One Time Password</p>
+                <form action="/validate_second_stage/" method="POST">
+        <br>
+                    <input type = "text" name="OTP" required class = "form-control" />
+        <br>
+                    <input type="submit" value="submit" name="Submit" class= "btn btn-info" />
+                </form>
+            </div>
+        </center>
+        </div>
+    </div>
 <!-- footer -->
-<div class="footer">
+<div class="footer" style="position:fixed; width:100%; bottom:0; ">
 	<div class="container">
 		<ul class="agileits_w3layouts_footer_info">
 			<li><a href="/home/">Home</a><i>|</i></li>
@@ -221,14 +181,14 @@ NaN
 <script src="js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function(){
-    $(".dropdown").hover(            
+    $(".dropdown").hover(
         function() {
             $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-            $(this).toggleClass('open');        
+            $(this).toggleClass('open');
         },
         function() {
             $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-            $(this).toggleClass('open');       
+            $(this).toggleClass('open');
         }
     );
 });
@@ -242,12 +202,12 @@ $(document).ready(function(){
 				containerID: 'toTop', // fading element id
 				containerHoverID: 'toTopHover', // fading element hover id
 				scrollSpeed: 1200,
-				easingType: 'linear' 
+				easingType: 'linear'
 				};
 			*/
-								
+
 			$().UItoTop({ easingType: 'easeOutQuart' });
-								
+
 			});
 	</script>
 <!-- //here ends scrolling icon -->

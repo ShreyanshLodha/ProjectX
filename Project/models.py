@@ -8,6 +8,7 @@ class customer(models.Model):
    password = models.CharField(max_length = 100,null=False)
    balance = models.FloatField(default='0')
    phonenumber = models.BigIntegerField(null=False)
+   two_step_validation = models.BooleanField(default=True)
 
 class shares(models.Model):
 	sid = models.AutoField(primary_key=True)

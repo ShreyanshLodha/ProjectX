@@ -8,6 +8,9 @@ import matplotlib.dates as mdates
 import hashlib
 import os
 import Project.LiveData
+from django.core.mail import send_mail
+from random import randint
+
 
 # Create your views here.
 def about(request):
@@ -170,11 +173,15 @@ def dashboard(request):
         response = HttpResponseRedirect("/dashboard/")
         try :
             res = customer.objects.get(email=username)
+            two_step_check = list(customer.objects.values_list('two_step_validation',flat=True).filter(email=username,password=hashed_password.hexdigest()))
             obj = customer.objects.filter(email=username,password=hashed_password.hexdigest())
-            print(len(obj))
-            if len(obj) == 1:
+            if len(obj) == 1 and (two_step_check[0] == False):
                 response.set_cookie('user-trade',username)
+                request.session['email'] = username
                 return response
+            elif len(obj) == 1 and (two_step_check[0] == True):
+                request.session['email'] = username
+                return HttpResponseRedirect("/two_step_validation/")
             else:
                 return HttpResponseRedirect("/login-wrong-password/")
         except customer.DoesNotExist:
@@ -184,12 +191,12 @@ def dashboard(request):
 
 
 def user(request):
-    if not 'user-trade' in request.COOKIES:
+    if 'user-trade' not in request.COOKIES and 'email' not in request.session:
         return HttpResponseRedirect("/login-required/")
     return render_to_response("user.html")
 
 def pasttransaction(request):
-    if not 'user-trade' in request.COOKIES:
+    if 'user-trade' not in request.COOKIES and 'email' not in request.session:
         return HttpResponseRedirect("/login-required/")
     return render_to_response("pasttransaction.html")
 
@@ -214,4 +221,35 @@ def register_user(request):
 def logout(request):
     response = HttpResponseRedirect('/home/')
     response.delete_cookie('user-trade')
+    if 'email' in request.session:
+        del request.session['email']
     return response
+
+def two_step_validation(request):
+    OTP = randint(100000, 999999)
+    if 'email' in request.session and 'OTP' not in request.POST:
+        user = [str(request.session['email'])]
+        request.session['OTP'] = OTP
+        send_mail("OTP for Login", "The login OTP for 2 step Validation is : "+str(OTP),"admin@trademarket.com",user)
+        return render_to_response("two-step-validation.html")
+    else:
+        return HttpResponseRedirect("/login-required/")
+
+@csrf_exempt
+def validate_second_stage(request):
+    EnteredOTP = str(request.POST['OTP'])
+    SentOTP = str(request.session['OTP'])
+    Email = str(request.session['email'])
+    if 'OTP' in request.POST and 'OTP' in request.session:
+        if EnteredOTP == SentOTP:
+            response = HttpResponseRedirect("/dashboard/")
+            response.set_cookie('user-trade',request.session['email'])
+            return response
+        else:
+            print(SentOTP, EnteredOTP, Email)
+            del request.session['email']
+            return HttpResponseRedirect("/login-wrong-password/")
+    else:
+        print(SentOTP, EnteredOTP, Email)
+        del request.session['email']
+        return HttpResponseRedirect("/login-required/")

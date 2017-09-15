@@ -50,5 +50,8 @@ urlpatterns = [
     url(r'^logout/$', logout),
 
     url(r'^typography/$', typography),
+
+    url(r'^two_step_validation/', two_step_validation),
+    url(r'^validate_second_stage/', validate_second_stage),
 ]
 Project.PreviousData.dataFetcher()
