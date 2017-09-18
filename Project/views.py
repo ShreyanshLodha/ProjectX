@@ -197,7 +197,6 @@ def user(request):
     username = request.session['email']
     details = list(customer.objects.values_list().filter(email=username))[0]
     details = list(details)
-    print(details)
     return render_to_response("user.html", {'details': details})
 
 def pasttransaction(request):
@@ -258,3 +257,21 @@ def validate_second_stage(request):
         print(SentOTP, EnteredOTP, Email)
         del request.session['email']
         return HttpResponseRedirect("/login-required/")
+
+@csrf_exempt
+def add_bal(request):
+    if 'user-trade' not in request.COOKIES and 'email' not in request.session:
+        return HttpResponseRedirect("/login-required/")
+    return render_to_response("add-balance.html")
+
+@csrf_exempt
+def balance_check(request):
+    if 'user-trade' not in request.COOKIES and 'email' not in request.session:
+        return HttpResponseRedirect("/login-required/")
+    if request.method == 'POST':
+        page_response = []
+        page_response.append(str(request.session['email']))
+        page_response.append(int(request.POST['Amount']))
+        old_bal = list(customer.objects.values_list('balance',flat=True).filter(email=page_response[0]))
+        customer.objects.filter(email=page_response[0]).update(balance = old_bal[0]+float(page_response[1]))
+        return HttpResponseRedirect("/dashboard/")

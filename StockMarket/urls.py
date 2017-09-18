@@ -53,5 +53,9 @@ urlpatterns = [
 
     url(r'^two_step_validation/', two_step_validation),
     url(r'^validate_second_stage/', validate_second_stage),
+
+    # add Balance
+    url(r'^add-balance/',add_bal),
+    url(r'^balance-check',balance_check),
 ]
 Project.PreviousData.dataFetcher()

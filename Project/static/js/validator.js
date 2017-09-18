@@ -1,5 +1,4 @@
 function validator() {
-    console.log("Called")
     var NameRE = /^[A-Za-z0-9 ]{3,30}$/;
     var EmailRE = /^[a-zA-Z0-9._]+@[a-zA-Z.]*[a-zA-Z]{2,}\.[a-zA-Z]{2,3}$/;
     var PhoneRE = /^[789]\d{9}$/;
@@ -34,7 +33,6 @@ function validator() {
         EType = 5;
         ErrorFlag = false;
     }
-    console.log(EType);
     if (EType == 1){
         alert("Name is not appropriate");
         return false;
