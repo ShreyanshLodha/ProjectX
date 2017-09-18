@@ -141,7 +141,7 @@
                                 <h4 class="title">Edit Profile</h4>
                             </div>
                             <div class="content">
-                                <form>
+                                <form method="post" action="/update-details/">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -157,7 +157,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Full Name</label>
-                                                <input type="text" class="form-control" placeholder="Name" value="{{ details.1 }}">
+                                                <input type="text" class="form-control" placeholder="Name" name="name" value="{{ details.1 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +166,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Mobile Number</label>
-                                                <input type="text" class="form-control" placeholder="Number" value="{{ details.5 }}">
+                                                <input type="text" class="form-control" placeholder="Number" name="number" value="{{ details.5 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -184,8 +184,6 @@
 
 									   <div class="col-md-12">
 										<input type="checkbox" name="fancy-checkbox-primary"   autocomplete="off" {% if details.6 == True %} checked {% endif %}/>
-
-                
 										<label for="fancy-checkbox-primary" >
 										Two Step Verification
 										</label>

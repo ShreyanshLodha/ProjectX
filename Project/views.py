@@ -275,3 +275,19 @@ def balance_check(request):
         old_bal = list(customer.objects.values_list('balance',flat=True).filter(email=page_response[0]))
         customer.objects.filter(email=page_response[0]).update(balance = old_bal[0]+float(page_response[1]))
         return HttpResponseRedirect("/dashboard/")
+
+@csrf_exempt
+def update_details(request):
+    if 'user-trade' not in request.COOKIES and 'email' not in request.session:
+        return HttpResponseRedirect("/login-required/")
+    if request.method == 'POST':
+        name = request.POST['name']
+        number = request.POST['number']
+        two_step = True
+        if 'fancy-checkbox-primary' in request.POST:
+            two_step = True
+        else:
+            two_step = False
+        email = request.session['email']
+        customer.objects.filter(email=email).update(name = name, phonenumber = number, two_step_validation = two_step)
+        return render_to_response('dashboard.html',{'message':True})
