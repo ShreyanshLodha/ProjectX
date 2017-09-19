@@ -61,4 +61,4 @@ urlpatterns = [
     # Update User's details
     url(r'^update-details/$',update_details)
 ]
-Project.PreviousData.dataFetcher()
+# Project.PreviousData.dataFetcher()

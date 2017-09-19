@@ -27,7 +27,7 @@ def home(request):
     return render_to_response("index.html")
 
 def login(request):
-    if 'user-trade' in request.COOKIES:
+    if 'user-trade' in request.COOKIES and 'email' in request.session:
         return HttpResponseRedirect("/dashboard/")
     return render(request,"login.html")
 
@@ -164,7 +164,7 @@ def typography(request):
 
 @csrf_exempt
 def dashboard(request):
-    if 'user-trade' in request.COOKIES:
+    if 'user-trade' in request.COOKIES and 'email' in request.session:
         return render_to_response("dashboard.html")
     if request.method == 'POST':
         username = str(request.POST['username'])
@@ -191,18 +191,20 @@ def dashboard(request):
 
 
 def user(request):
-    if 'user-trade' not in request.COOKIES and 'email' not in request.session:
+    if 'user-trade' in request.COOKIES and 'email' in request.session:
+        username = request.session['email']
+        details = list(customer.objects.values_list().filter(email=username))[0]
+        details = list(details)
+        return render_to_response("user.html", {'details': details})
+    else:
         return HttpResponseRedirect("/login-required/")
-
-    username = request.session['email']
-    details = list(customer.objects.values_list().filter(email=username))[0]
-    details = list(details)
-    return render_to_response("user.html", {'details': details})
 
 def pasttransaction(request):
-    if 'user-trade' not in request.COOKIES and 'email' not in request.session:
+    if 'user-trade' in request.COOKIES and 'email' in request.session:
+        return render_to_response("pasttransaction.html")
+    else:
         return HttpResponseRedirect("/login-required/")
-    return render_to_response("pasttransaction.html")
+
 
 @csrf_exempt
 def register_user(request):
