@@ -5,12 +5,14 @@ from django.views.decorators.csrf import csrf_exempt
 from Project.models import customer,historical_data,shares,buy_transaction,sell_transaction
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from matplotlib.pylab import rcParams
 import hashlib
 import os
 import Project.LiveData
 from django.core.mail import send_mail
 from random import randint
-
+import Project.LiveGraph
+import dateutil
 
 # Create your views here.
 def about(request):
@@ -256,7 +258,6 @@ def validate_second_stage(request):
             del request.session['email']
             return HttpResponseRedirect("/login-wrong-password/")
     else:
-        print(SentOTP, EnteredOTP, Email)
         del request.session['email']
         return HttpResponseRedirect("/login-required/")
 
@@ -293,3 +294,62 @@ def update_details(request):
         email = request.session['email']
         customer.objects.filter(email=email).update(name = name, phonenumber = number, two_step_validation = two_step)
         return render_to_response('dashboard.html',{'message':True})
+
+
+def live(request):
+    time_data = Project.LiveGraph.time_analysis()
+
+    # Convert interval into seconds
+    interval = time_data['TimeInterval']*60
+
+    # to get the stock ID of the stock selected by the user
+    share_id_from_url = request.get_full_path()
+    temp_variable  = share_id_from_url.rfind('/')
+    share_id_from_url = share_id_from_url[temp_variable+1:]
+    if int(share_id_from_url)>50 or int(share_id_from_url)<1:
+        return HttpResponseRedirect("/equity/")
+
+    # Code for sending request to google finance
+    code = list(shares.objects.filter(sid=share_id_from_url).values_list('stock_code', flat=True))
+    # to remove  NSE/ from the fetched value
+    code = str(code[0])[4:]
+
+    # take high price for every interval
+    url = "https://finance.google.com/finance/getprices?q="+code+"&x=NSE&p=1d&f=h&i="+str(interval)
+    rate_list, date_list = Project.LiveGraph.fetch_query(url,time_data['TimeInterval'])
+    dates = [dateutil.parser.parse(s) for s in date_list]
+
+    # graph related stuff starts here
+    ax = plt.gca()
+    ax.set_xticks(dates)
+
+    xfmt = mdates.DateFormatter('%H:%M')
+    ax.xaxis.set_major_formatter(xfmt)
+    ax.xaxis.set_major_locator(mdates.HourLocator())
+    ax.xaxis.set_minor_locator(mdates.MinuteLocator(byminute=[15,30,45]))
+    plt.plot(dates, rate_list, color="#ff5000")
+    plt.gcf().set_size_inches(16,6)
+    plt.grid()
+    plt.xlabel("Time")
+    plt.ylabel("Price")
+    share_name = list(shares.objects.values_list('stock_name', flat=True).filter(sid=share_id_from_url))
+    plt.title(str(share_name[0]))
+    original_dir = os.getcwd()
+    os.chdir('Project/static/images/')
+    if os._exists("graphLive.png"):
+        os.remove("graphLive.png")
+    plt.savefig("graphLive.png")
+    os.chdir(original_dir)
+    plt.clf()
+    plt.close()
+    # graph related work ends here
+
+    # get individual stock's ratio and other useful information
+    # fetch ID which is supported by google
+    google_id = list(shares.objects.filter(sid=share_id_from_url).values_list('google_id', flat=True))
+    google_id = google_id[0]
+
+    details = Project.LiveGraph.get_detailed_info(google_id)
+    # TODO : To display these details with appropriate info in webpage
+
+    return render_to_response("Live.html", {'data':details})

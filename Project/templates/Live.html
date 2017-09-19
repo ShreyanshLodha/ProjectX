@@ -6,9 +6,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" id="result">
+<html lang="en">
 <head>
-<title>Trade Market a Corporate Business Category Flat Bootstrap Responsive Website Template | Equity :: w3layouts</title>
+<title>Live Stock Watch</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -23,7 +23,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}" />
 <!-- //font-awesome icons -->
 <!-- js -->
-	<script type="text/javascript" src="{% static "js/jquery.marquee.min.js" %}"></script>
+<script src="{% static "js/jquery-1.11.1.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery.marquee.min.js" %}"></script>
 <!-- //js -->
 <link href="//fonts.googleapis.com/css?family=Muli:300,300i,400,400i" rel="stylesheet">
 <!-- start-smoth-scrolling -->
@@ -37,7 +38,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	});
 </script>
-<!-- start-smoth-scrolling -->
+
 </head>
 	
 <body>
@@ -49,6 +50,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h1><a href="/home/"><span>Trade</span> Market<i>Trade anytime anywhere</i></a></h1>
 				</div>
 				<div class="agileits_search">
+					<form action="#" method="post">
+						<input name="Search" type="text" placeholder="Search" required="">
 						<select id="agileinfo_search" name="agileinfo_search">
 							<option value="commodities">Commodities</option>
 							<option value="navs">NAVs</option>
@@ -58,6 +61,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<option value="notices">Notices</option>
 							<option value="all">All</option>
 						</select>
+						<input type="submit" value="Search">
+					</form>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -83,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<ul class="nav navbar-nav nav_1" style="width: 100%;">
 							<li><a href="/home/">Home</a></li>
 							<li><a href="/equity/">Live Market Watch</a></li>
-							<!--li><a href="news/">News</a></li> -->
+							<!-- <li><a href="news/">News</a></li> -->
 							
 							<li><a href="/service/">Contact Us</a></li>
 							<li style="float: right;"><a href="/signup/" id="user-register" >Register</a> </li>
@@ -98,67 +103,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //navigation -->
 <script type="text/javascript" src="{% static "js/cookieChecker.js" %}" >
 </script>
-<!-- equity -->
-	<div class="equity">
-		<div class="container">
-			<div class="row">
-			<div class="col-md-12">
-		{% if data %}
-				<table class="table table-bordered table-hover">
-					<thead>
-					<tr>
-						<th>Stock Name</th>
-						<th>Current Price</th>
-						<th>Change</th>
-						<th>Change(%)</th>
-						<th>Earning per Share</th>
-					</tr>
-					</thead>
-					<tbody>
+<!-- single -->
+<form action="/single/" method="post">
+	<div class="news-original">
+	<div class="container">
+		<div class="agileinfo_news_original_grids w3_agile_news_market_grids">
+			<div class="container" id="news-original">
+    <hr />
+						<div class="row">
+						<div class="col-sm-12">
+							<img class="img-responsive" src= "{% static "images/graphLive.png" %}" alt=" " class="img-responsive" style="width:streach;" >
+						</div>
 
-{% for items in data %}
-					<tr>
-						<td><strong><a tabindex="-1" href="/live/{{ forloop.counter }}">{{ items.2 }}</a><strong></td>
-						<td class="color-changer-{{ forloop.counter }}"><strong>{{ items.6 }}</strong></td>
-						<td class="color-changer-{{ forloop.counter }}" id = {{ forloop.counter }}><strong>{{ items.7 }}</strong></td>
-						<td class="color-changer-{{ forloop.counter }}">{{ items.9 }} %</td>
-						<td>{% if items.11 %}
-{{ items.11 }}
-						{% else %}
-NaN
-{% endif %}
-						</td>
-					</tr>
-{% endfor %}
+						</div>
 
-					</tbody>
-				</table>
-{% else %}
-<p>Sorry Data not available</p>
-{% endif %}
-						<script>
-	for (i = 1; i<=50; i++){
-						    var temp = document.getElementById(i);
-						    temp = (temp.innerText).toString();
-							if (temp.includes('-')){
-							    //Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.backgroundColor = "#CB4335");
-								Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.color = "#B03A2E");
-							}
-							else{
-							    //Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.backgroundColor = "#229954");
-							    Array.from(document.getElementsByClassName("color-changer-"+i), e => e.style.color = "#1E8449");
-							}
+					<div class="row" style="padding-top:70px;">
+    					<hr />
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="HRate">Highest Rate</label>
+								<input type="text" name="Highest Rate" class="form-control" id="HRate"  readonly>
+							</div>
+						</div>
 
-	}
-	</script>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="DateH">Date of Highest Rate</label>
+								<input type="text" name="Dt_of_Highest_Rate" class="form-control" id="DateH" readonly>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+    							<label for="LRate">Lowest Rate</label>
+								<input type="text" name="Lowest Rate" class="form-control" id="LRate" readonly>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="DateL">Date of Lowest Rate</label>
+								<input type="text" name="Dt_of_Lowest_Rate" class="form-control" id="DateL" readonly>
+							</div>
+						</div>
+						
 				</div>
 			</div>
-		</div>
-			<div class="clearfix"> </div>
 	</div>
-<!-- //equity -->
+</div>
+</form>
+<!-- //single -->
 <!-- footer -->
-<div class="footer">
+<div class="footer" id="footer">
 	<div class="container">
 		<ul class="agileits_w3layouts_footer_info">
 			<li><a href="/home/">Home</a><i>|</i></li>
@@ -174,9 +169,42 @@ NaN
 	<script type="text/javascript" src="{% static "js/raphael.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery.enumerable.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery.tufte-graph.js" %}"></script>
+	 <script type="text/javascript">
+      $(document).ready(function () {
+
+        jQuery('#stacked-graph').tufteBar({
+          data: [
+            [[1.5, 1.0, 0.51], {label: '2013'}],
+            [[2.0, 1.03, 0.6], {label: '2014'}],
+            [[2.4, 0.9,  2.0], {label: '2015'}],
+            [[1.5, 2.6, 0.45], {label: '2016'}]
+          ],
+          barLabel:  function(home) {
+            amount = ($(this[0]).sum() * 10000).toFixed(0);
+            return '$' + $.tufteBar.formatNumber(amount);
+          },
+          axisLabel: function(home) { return this[1].label },
+          legend: {
+            data: ["Finance", "Metal", "Telecom"]
+          }
+        });
+      });
+    </script>
 <!-- //stacked-graph -->
+<!-- script for marque -->
+	<script>
+	  $('.marquee').marquee({
+		gap: 100,
+		delayBeforeStart: 0,
+		direction: 'left',
+		duplicated: true,
+		pauseOnHover: true
+	});
+	</script>
+	
+<!-- //script for marque -->
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
 <script>
 $(document).ready(function(){
     $(".dropdown").hover(            
@@ -209,15 +237,5 @@ $(document).ready(function(){
 			});
 	</script>
 <!-- //here ends scrolling icon -->
-
 </body>
 </html>
-<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
-<script>
-	function autoRefresh_div()
- 	{
-      	$("#result").load("/equity/");// a function which will load data from other file after x seconds
-  	}
-
-  	setInterval('autoRefresh_div()', 5000); // refresh div after 5 secs
-</script>

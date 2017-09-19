@@ -59,6 +59,9 @@ urlpatterns = [
     url(r'^balance-check/',balance_check),
 
     # Update User's details
-    url(r'^update-details/$',update_details)
+    url(r'^update-details/$',update_details),
+
+    # Live Data Call
+    url(r'^live/',live)
 ]
 # Project.PreviousData.dataFetcher()
