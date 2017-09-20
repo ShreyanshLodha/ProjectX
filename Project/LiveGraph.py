@@ -98,7 +98,6 @@ def get_detailed_info(id):
     data = data.split("},{")
     data = data[0]
     data = re.sub(r'.*values":', "", data)
-    print(data)
 
     # convert string like list to actual list
 
