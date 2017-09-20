@@ -327,7 +327,6 @@ def live(request):
     ax.xaxis.set_major_locator(mdates.HourLocator())
     ax.xaxis.set_minor_locator(mdates.MinuteLocator(byminute=[15,30,45]))
     plt.plot(dates, rate_list, color="#ff5000")
-    plt.gcf().set_size_inches(16,6)
     plt.grid()
     plt.xlabel("Time")
     plt.ylabel("Price")
@@ -340,7 +339,6 @@ def live(request):
     plt.savefig("graphLive.png")
     os.chdir(original_dir)
     plt.clf()
-    plt.close()
     # graph related work ends here
 
     # get individual stock's ratio and other useful information

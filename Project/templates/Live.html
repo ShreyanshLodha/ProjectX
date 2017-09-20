@@ -40,8 +40,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 
 </head>
-	
-<body>
+<script src="{% static "js/keyEvent.js" %}"></script>
+<body onkeypress="return myKeyPress(event)">
 <!-- header -->
 	<div class="header">
 		<div class="w3ls_header_middle">
@@ -100,19 +100,59 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</nav>
 		</div>
 	</div>
+
+{% if Balance_avail && session_exist %}
+<div class="container" style="background-color: black; padding:15px 15px 15px 15px; width:100%">
+	<div class="row">
+		<center>
+		<div class="col-md-12"><p style="color:white;"><strong>Insufficient Balance for transaction.</strong></p></div>
+		</center>
+	</div>
+</div>
+{% endif %}
+
 <!-- //navigation -->
 <script type="text/javascript" src="{% static "js/cookieChecker.js" %}" >
 </script>
 <!-- single -->
-<form action="/single/" method="post">
-	<div class="news-original">
+<div class="container" style="padding-top: 15px;">
+	<center>
+	<div class="row">
+		<div class="col-md-12">
+<form class="form-inline" action="//" method="post">
+  <div class="form-group" style="padding-left: 10px;">
+    <input type="hidden" class="form-control" name="stock_id" > <!-- Set stock id here received from django-->
+  </div>
+  <div class="form-group" style="padding-left: 10px;">
+    <label for="stock_price">Stock Price</label>
+    <input type="number" class="form-control" id="stock_price" name="stock_price" disabled> <!-- Set stock price here received from django-->
+  </div>
+  <div class="form-group" style="padding-left: 10px;">
+    <label for="stock_qty">Quantity</label>
+    <input type="number" min="1" class="form-control" id="stock_qty" placeholder="Minimum 1">
+  </div>
+	<div class="form-group" style="padding-left: 10px;">
+    <label for="stock_brokerage">Brokerage per transaction</label>
+    <input type="text" class="form-control" id="stock_brokerage" value="0.50%" disabled>
+  </div>
+    <button type="submit" class="btn btn-success" name="Buy">Buy</button>
+	<button type="submit" class="btn btn-info" name="Sell">Sell</button>
+</form>
+		</div>
+	</div>
+	</center>
+</div>
+
 	<div class="container">
 		<div class="agileinfo_news_original_grids w3_agile_news_market_grids">
 			<div class="container" id="news-original">
     <hr />
+
 						<div class="row">
 						<div class="col-sm-12">
+							<center>
 							<img class="img-responsive" src= "{% static "images/graphLive.png" %}" alt=" " class="img-responsive" style="width:streach;" >
+							</center>
 						</div>
 
 						</div>
