@@ -25,12 +25,8 @@ urlpatterns = [
     url(r'^equity/', equity),
     url(r'^home/$', home),
     url(r'^home-registered/$',register_user),
-    url(r'^news/', news),
-    url(r'^portfolio/', portfolio),
-    url(r'^products/', products),
     url(r'^service', services),
     url(r'^single/', single),
-    url(r'^sitemap/', sitemap),
     url(r'^dashboard/$',dashboard),
     url(r'^user/$',user),
     url(r'^past-transaction/$',pasttransaction),
@@ -48,8 +44,6 @@ urlpatterns = [
 
     # logout
     url(r'^logout/$', logout),
-
-    url(r'^typography/$', typography),
 
     url(r'^two_step_validation/', two_step_validation),
     url(r'^validate_second_stage/', validate_second_stage),
