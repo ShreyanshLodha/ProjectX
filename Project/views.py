@@ -16,34 +16,50 @@ import dateutil
 
 # Create your views here.
 def about(request):
-    return render_to_response("about.html")
+    old_bal = False
+    if 'email' in request.session:
+        old_bal = list(
+            customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
+        old_bal = old_bal[0]
+    return render_to_response("about.html",{'DBalance':old_bal})
 
 def contact(request):
-    return render_to_response("contact.html")
+    old_bal = False
+    if 'email' in request.session:
+        old_bal = list(
+            customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
+        old_bal = old_bal[0]
+    return render_to_response("contact.html",{'DBalance':old_bal})
 
 def equity(request):
     data = Project.LiveData.get_data_csv()
-    return render_to_response("equity.html", {'data' : data})
+    old_bal = False
+    if 'email' in request.session:
+        old_bal = list(
+            customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
+        old_bal = old_bal[0]
+    return render_to_response("equity.html", {'data' : data, 'DBalance':old_bal})
 
 def home(request):
-    return render_to_response("index.html")
+    old_bal = False
+    if 'email' in request.session:
+        old_bal = list(
+            customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
+        old_bal = old_bal[0]
+    return render_to_response("index.html",{'DBalance':old_bal})
 
 def login(request):
     if 'user-trade' in request.COOKIES and 'email' in request.session:
         return HttpResponseRedirect("/dashboard/")
     return render(request,"login.html")
 
-def news(request):
-    return render_to_response("news.html")
-
-def portfolio(request):
-    return render_to_response("portfolio.html")
-
-def products(request):
-    return render_to_response("products.html")
-
 def services(request):
-    return render_to_response("service.html")
+    old_bal = False
+    if 'email' in request.session:
+        old_bal = list(
+            customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
+        old_bal = old_bal[0]
+    return render_to_response("service.html",{'DBalance':old_bal})
 
 def signup(request):
     return render_to_response("sign-up.html")
@@ -65,6 +81,12 @@ def single(request):
 
     stocks['i'] = zip(stocks['id'], stocks['names'])
 
+    old_bal = False
+    if 'email' in request.session:
+        old_bal = list(
+            customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
+        old_bal = old_bal[0]
+    stocks['DBalance'] = old_bal
 
     if request.method == "POST" and 'share' in request.POST:
         selected_share = int(request.POST['share'])
@@ -154,16 +176,12 @@ def single(request):
         # set cookie
         response.set_cookie('share-selected', selected_share)
         response.set_cookie('share-duration', duration)
+
         return response
     else:
         response = render_to_response("single.html", stocks)
         return response
 
-def sitemap(request):
-    return render_to_response("sitemap.html")
-
-def typography(request):
-    return render_to_response("typography.html")
 
 @csrf_exempt
 def dashboard(request):
@@ -204,7 +222,12 @@ def user(request):
 
 def pasttransaction(request):
     if 'user-trade' in request.COOKIES and 'email' in request.session:
-        return render_to_response("pasttransaction.html")
+        old_bal = False
+        if 'email' in request.session:
+            old_bal = list(
+                customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
+            old_bal = old_bal[0]
+        return render_to_response("pasttransaction.html",{'DBalance':old_bal})
     else:
         return HttpResponseRedirect("/login-required/")
 
@@ -223,7 +246,7 @@ def register_user(request):
         except customer.DoesNotExist:
             user = customer(name=name,email=email,password=hashed_password.hexdigest(),phonenumber=number)
             user.save()
-            return render(request,"index.html")
+            return render_to_response("index.html")
     else:
         return HttpResponseRedirect("/home/")
 
@@ -276,7 +299,7 @@ def balance_check(request):
         page_response = []
         page_response.append(str(request.session['email']))
         page_response.append(int(request.POST['Amount']))
-        old_bal = list(customer.objects.values_list('balance',flat=True).filter(email=page_response[0]))
+        old_bal = list(customer.objects.values_list('balance',flat=True).filter(email=str(request.session['email'])))
         customer.objects.filter(email=page_response[0]).update(balance = old_bal[0]+float(page_response[1]))
         return HttpResponseRedirect("/dashboard/")
 
@@ -294,7 +317,12 @@ def update_details(request):
             two_step = False
         email = request.session['email']
         customer.objects.filter(email=email).update(name = name, phonenumber = number, two_step_validation = two_step)
-        return render_to_response('dashboard.html',{'message':True})
+        old_bal = False
+        if 'email' in request.session:
+            old_bal = list(
+                customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
+            old_bal = old_bal[0]
+        return render_to_response('dashboard.html',{'message':True,'DBalance':old_bal})
 
 
 def live(request):
@@ -348,6 +376,10 @@ def live(request):
     google_id = google_id[0]
 
     details = Project.LiveGraph.get_detailed_info(google_id)
-    # TODO : To display these details with appropriate info in webpage
 
-    return render_to_response("Live.html", {'data':details})
+    old_bal = False
+    if 'email' in request.session:
+        old_bal = list(customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
+        old_bal = old_bal[0]
+
+    return render_to_response("Live.html", {'data':details, 'DBalance':old_bal})
