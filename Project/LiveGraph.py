@@ -92,13 +92,15 @@ def get_detailed_info(id):
     data = str(data.text)
 
     # Purify response and keep relevant content
-    data = re.sub(r'.*rows:','',data)
-    data = data.split("],visible")[0]
+    data = re.sub(r'.*rows":','',data)
+    data = data.split('],"visible')[0]
     data = data[1:-1]
     data = data.split("},{")
     data = data[0]
-    data = re.sub(r'.*values:', "", data)
+    data = re.sub(r'.*values":', "", data)
+    print(data)
 
     # convert string like list to actual list
+
     data = ast.literal_eval(data)
     return data

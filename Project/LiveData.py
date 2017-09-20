@@ -65,17 +65,15 @@ def get_data(stock_name_list):
     tempData = []
     data = requests.get(query)
     data = str(data.text)
-    data = re.sub(r'.*rows:','',data)
-    data = data.split("],visible")[0]
+    data = re.sub(r'.*rows":','',data)
+    data = data.split('],"visible')[0]
     data = data[1:-1]
     data = data.split("},{")
 
     for crap in data :
-        crap = re.sub(r'.*values:',"",crap)
+        crap = re.sub(r'.*values":',"",crap)
         crap = ast.literal_eval(crap)
         tempData.append(crap)
 
     data = tempData
     return data
-
-get_data_csv()

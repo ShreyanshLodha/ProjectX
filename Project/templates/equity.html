@@ -214,10 +214,7 @@ $(document).ready(function(){
 </html>
 <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
 <script>
-	function autoRefresh_div()
- 	{
-      	$("#result").load("/equity/");// a function which will load data from other file after x seconds
-  	}
-
-  	setInterval('autoRefresh_div()', 5000); // refresh div after 5 secs
+setTimeout(function(){
+   window.location.reload(1);
+}, 5000);
 </script>

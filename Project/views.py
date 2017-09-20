@@ -318,7 +318,7 @@ def live(request):
     url = "https://finance.google.com/finance/getprices?q="+code+"&x=NSE&p=1d&f=h&i="+str(interval)
     rate_list, date_list = Project.LiveGraph.fetch_query(url,time_data['TimeInterval'])
     dates = [dateutil.parser.parse(s) for s in date_list]
-
+    print(url)
     # graph related stuff starts here
     ax = plt.gca()
     ax.set_xticks(dates)
