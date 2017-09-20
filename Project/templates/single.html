@@ -84,7 +84,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="w3ls_header_middle">
 			<div class="container">
 				<div class="agileits_logo">
-					<h1><a href="/home/"><span>Trade</span> Market<i>Trade anytime anywhere</i></a></h1>
+					<h1><a href="/home/"><span>World</span> of Commerce<i>Trade anytime anywhere</i></a></h1>
 				</div>
 				<div class="agileits_search">
 					<form action="#" method="post">
@@ -127,9 +127,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href="/equity/">Live Market Watch</a></li>
 							<!-- <li><a href="news/">News</a></li> -->
 							
-							<li><a href="/service/">Contact Us</a></li>
+							<li><a href="/contact/">Contact Us</a></li>
+							<li><a href="/single/">Past Stock Data</a></li>
 							<li style="float: right;"><a href="/signup/" id="user-register" >Register</a> </li>
 						    <li style="float: right;"><a href="/login/" id="user-login">Login</a> </li>
+							<li style="float: right;"><a href="/user/" id="user-login">Balance</a> </li>
 						</ul>
 					</nav>
 				</div>
@@ -184,10 +186,16 @@ for(var i=0; i<cookiearray.length; i++) {
 
 			<div class="container" id="news-original">
     <hr />
-						<div class="row" style="padding: 10px 10px 10px 10px;">
+						<div class="row">
+						<div class= "col-sm-9" style="padding: 10px 10px 10px 10px;">
 							<h4>CEO : {{CEO}}</h4>
 							<h4>Company Description : {{desc}}</h4>
 						</div>
+						<div class = "col-sm-3">
+						<div class="type-info"><a href="/live/{{stock_no}}" class="btn btn-primary" style="width: 100%;">Live Rate</a>
+						</div>
+						</div>
+						
 						<div class="row">
 						<div class="col-sm-9">
 							<img class="img-responsive" src= "{% static "images/graph.png" %}" alt=" " class="img-responsive" style="width:streach;" >
@@ -256,8 +264,8 @@ for(var i=0; i<cookiearray.length; i++) {
 			<li><a href="/home/">Home</a><i>|</i></li>
 			<li><a href="/news/">Markets</a><i>|</i></li>
 			<li><a href="/portfolio/">portfolio</a><i>|</i></li>
-			<li><a href="/about/">About Us</a><i>|</i></li>
-			<li><a href="/sitemap/">sitemap</a></li>
+			<li><a href="/about/">About Us</a></li>
+			
 		</ul>
 	</div>
 </div>

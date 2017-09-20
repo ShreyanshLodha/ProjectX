@@ -149,6 +149,7 @@ def single(request):
         stocks['min_value_date'] = min_value_date
         stocks['CEO'] = stock_CEO
         stocks['desc'] = stock_desc
+        stocks['stock_no'] = selected_share
         response = render_to_response("single.html", stocks)
         # set cookie
         response.set_cookie('share-selected', selected_share)
