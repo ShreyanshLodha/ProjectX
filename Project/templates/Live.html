@@ -161,34 +161,87 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     					<hr />
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="HRate">Highest Rate</label>
-								<input type="text" name="Highest Rate" class="form-control" id="HRate"  readonly>
+								<label for="price">Price</label>
+								<input type="text" name="Price" class="form-control" value="{% if data.6 %} {{ data.6 }}	{% else %} NaN {% endif %}" id="price"  readonly>
 							</div>
 						</div>
 
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="DateH">Date of Highest Rate</label>
-								<input type="text" name="Dt_of_Highest_Rate" class="form-control" id="DateH" readonly>
+								<label for="Change%">Change %</label>
+								<input type="text" name="change%" class="form-control" value="{% if data.9 %} {{ data.9 }}	{% else %} NaN {% endif %}" id="Change%" readonly>
 							</div>
 						</div>
 						<div class="col-sm-3">
 							<div class="form-group">
-    							<label for="LRate">Lowest Rate</label>
-								<input type="text" name="Lowest Rate" class="form-control" id="LRate" readonly>
+    							<label for="eps">EPS</label>
+								<input type="text" name="EPS" class="form-control" value="{% if data.11 %} {{ data.11 }}	{% else %} NaN {% endif %}" id="eps" readonly>
 							</div>
 						</div>
 						
 						<div class="col-sm-3">
 							<div class="form-group">
-								<label for="DateL">Date of Lowest Rate</label>
-								<input type="text" name="Dt_of_Lowest_Rate" class="form-control" id="DateL" readonly>
+								<label for="cap">CAP</label>
+								<input type="text" name="CAP" class="form-control" value="{% if data.15 %} {{ data.15 }}	{% else %} NaN {% endif %}" id="cap" readonly>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row" style="padding-top:70px;">
+    					
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="divident">Divident</label>
+								<input type="text" name="Divident" class="form-control" value="{% if data.17 %} {{ data.17 }}	{% else %} NaN {% endif %}" id="divident"  readonly>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="currentratio">Current Ratio</label>
+								<input type="text" name="current_ratio" class="form-control" value="{% if data.19 %} {{ data.19 }}	{% else %} NaN {% endif %}" id="currentratio" readonly>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+    							<label for="retavginvest">Return on avg. Investment</label>
+								<input type="text" name="ret_avg_invest" class="form-control" value="{% if data.26 %} {{ data.26 }}	{% else %} NaN {% endif %}" id="retavginvest" readonly>
 							</div>
 						</div>
 						
-				</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="Revenue">Revenue</label>
+								<input type="text" name="revenue" class="form-control" value="{% if data.33 %} {{ data.33 }} {% else %} NaN {% endif %}" id="Revenue" readonly>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row" style="padding-top:70px;">
+    					
+						<div class="col-sm-3"></div>
+						
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="netincome">Net Income</label>
+								<input type="text" name="net_income" class="form-control" value="{% if data.34 %} {{ data.34 }}	{% else %} NaN {% endif %}" id="netincome"  readonly>
+							</div>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="ebitda">EBITDA</label>
+								<input type="text" name="EBITDA" class="form-control" value="{% if data.35 %} {{ data.35 }}	{% else %} NaN {% endif %}" id="ebitda" readonly>
+							</div>
+						</div>
+						
+						<div class="col-sm-3"> </div>
+					
+					</div>
+					
 			</div>
 	</div>
+</div>
 </div>
 </form>
 <!-- //single -->
