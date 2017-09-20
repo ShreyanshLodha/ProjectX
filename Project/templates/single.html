@@ -131,7 +131,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href="/single/">Past Stock Data</a></li>
 							<li style="float: right;"><a href="/signup/" id="user-register" >Register</a> </li>
 						    <li style="float: right;"><a href="/login/" id="user-login">Login</a> </li>
-							<li style="float: right;"><a href="/user/" id="user-login">Balance</a> </li>
+							<script type="text/javascript" src="{% static "js/cookieChecker.js" %}" ></script>
+	{% if DBalance == False %}
+
+{% else %}
+<li style="float: right;"><a href="/user/">Balance : {{DBalance}}</a></li>
+{% endif %}
 						</ul>
 					</nav>
 				</div>
@@ -140,8 +145,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 <!-- //navigation -->
-<script type="text/javascript" src="{% static "js/cookieChecker.js" %}" >
-</script>
+
 <!-- single -->
 <form action="/single/" method="post">
 	<div class="news-original">
@@ -262,8 +266,7 @@ for(var i=0; i<cookiearray.length; i++) {
 	<div class="container">
 		<ul class="agileits_w3layouts_footer_info">
 			<li><a href="/home/">Home</a><i>|</i></li>
-			<li><a href="/news/">Markets</a><i>|</i></li>
-			<li><a href="/portfolio/">portfolio</a><i>|</i></li>
+			
 			<li><a href="/about/">About Us</a></li>
 			
 		</ul>

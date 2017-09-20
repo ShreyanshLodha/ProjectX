@@ -145,7 +145,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li><a href="/single/">Past Data Stock</a></li>
 						<li style="float: right;"><a href="/signup/" id="user-register" >Register</a> </li>
 						<li style="float: right;"><a href="/login/" id="user-login">Login</a> </li>
-						<li style="float: right;"><a href="/user/">Balance</a> </li>
+						<script type="text/javascript" src="{% static "js/cookieChecker.js" %}" ></script>
+	{% if DBalance == False %}
+
+{% else %}
+<li style="float: right;"><a href="/user/">Balance : {{DBalance}}</a></li>
+{% endif %}
 					</ul>
 				</nav>
 			</div>
@@ -154,8 +159,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 <!-- //navigation -->
-<script type="text/javascript" src="{% static "js/cookieChecker.js" %}" ></script>
-</script>
+
 <!-- Hidden message for registered users -->
 <div class="hidden-user-message" style="padding-bottom: 10px; padding-top: 10px; background-color: greenyellow;" id="hidden-div">
 	<div class="container">
@@ -334,8 +338,7 @@ A demat account is to be opened with any of the vault members (DP). A DP interfa
 	<div class="container">
 		<ul class="agileits_w3layouts_footer_info">
 			<li><a href="/home/">Home</a><i>|</i></li>
-			<li><a href="/news/">Markets</a><i>|</i></li>
-			<li><a href="/portfolio/">portfolio</a><i>|</i></li>
+			
 			<li><a href="/about/">About Us</a></li>
 			
 		</ul>
