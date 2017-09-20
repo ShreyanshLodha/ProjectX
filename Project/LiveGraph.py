@@ -20,10 +20,11 @@ def time_analysis():
     _MMClose = 30
 
     # Decide interval for different times.
-
-    # if markets are closed then use 30 mins as interval
     if HH_curr >=_HHClose or HH_curr <= _HHOpen:
-        interval = 10
+        if HH_curr>= _HHOpen and MM_curr >= HH_curr:
+            interval = 1
+        else:
+            interval = 10
 
     elif HH_curr == 10:
         interval = 2
@@ -70,30 +71,34 @@ def fetch_query(url,interval):
     length = len(data)
     time_list = []
 
+    # Create time string for all the items available
     for x in range(0,length):
         time_list.append(opening_time)
         opening_time = opening_time + datetime.timedelta(minutes=interval)
 
     time_list_string = []
+    # Converting datetime to string
     for items in time_list:
         time_list_string.append(str(items))
 
     time_list = time_list_string
 
-    print(len(time_list))
-    print(len(data))
     return data, time_list
 
 def get_detailed_info(id):
+    # send request for the stocks available
     query = 'https://finance.google.com/finance/data?dp=mra&output=json&catid=all&cid='+str(id)
     data = requests.get(query)
     data = str(data.text)
 
+    # Purify response and keep relevant content
     data = re.sub(r'.*rows:','',data)
     data = data.split("],visible")[0]
     data = data[1:-1]
     data = data.split("},{")
     data = data[0]
     data = re.sub(r'.*values:', "", data)
+
+    # convert string like list to actual list
     data = ast.literal_eval(data)
     return data
