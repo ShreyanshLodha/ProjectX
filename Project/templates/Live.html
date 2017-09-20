@@ -93,6 +93,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li><a href="/service/">Contact Us</a></li>
 							<li style="float: right;"><a href="/signup/" id="user-register" >Register</a> </li>
 						    <li style="float: right;"><a href="/login/" id="user-login">Login</a> </li>
+	<script type="text/javascript" src="{% static "js/cookieChecker.js" %}" ></script>
+	{% if DBalance == False %}
+
+{% else %}
+<li style="float: right;"><a href="/user/">Balance : {{DBalance}}</a></li>
+{% endif %}
 						</ul>
 					</nav>
 				</div>
@@ -101,7 +107,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 
-{% if Balance_avail && session_exist %}
+{% if Balance_avail and session_exist %}
 <div class="container" style="background-color: black; padding:15px 15px 15px 15px; width:100%">
 	<div class="row">
 		<center>
@@ -112,7 +118,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 {% endif %}
 
 <!-- //navigation -->
-<script type="text/javascript" src="{% static "js/cookieChecker.js" %}" >
+
 </script>
 <!-- single -->
 <div class="container" style="padding-top: 15px;">
