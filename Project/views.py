@@ -1,12 +1,10 @@
 from django.shortcuts import render
-from django.http.response import HttpResponse,HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.cache import cache_control
 from Project.models import customer,historical_data,shares,buy_transaction,sell_transaction,brokerage,inventory
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from matplotlib.pylab import rcParams
 import hashlib
 import os
 import Project.LiveData
@@ -34,12 +32,14 @@ def contact(request):
 
 def equity(request):
     data = Project.LiveData.get_data_csv()
+    data1 = Project.LiveGraph.time_analysis()
+
     old_bal = False
     if 'email' in request.session:
         old_bal = list(
             customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
         old_bal = old_bal[0]
-    return render_to_response("equity.html", {'data' : data, 'DBalance':old_bal})
+    return render_to_response("equity.html", {'data' : data, 'DBalance':old_bal, 'market_on':data1['MarketStatus']})
 
 def home(request):
     old_bal = False
@@ -603,7 +603,7 @@ def live(request):
     return render_to_response("Live.html", {'data':details,
                                             'DBalance':old_bal,
                                             'stock_id':share_id_from_url,
-                                            'market_status':True,
+                                            'market_status':time_data['MarketStatus'],
                                             'session_status':session_status,
                                             'less_balance':less_balance,
                                             'transaction_done':transaction_done,

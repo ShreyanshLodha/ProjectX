@@ -40,75 +40,66 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>
 
 </head>
-<script src="{% static "js/keyEvent.js" %}"></script>
-<body onkeypress="return myKeyPress(event)">
+<body>
 <!-- header -->
-	<div class="header">
-		<div class="w3ls_header_middle">
-			<div class="container">
-				<div class="agileits_logo">
-					<h1><a href="/home/"><span>Trade</span> Market<i>Trade anytime anywhere</i></a></h1>
-				</div>
-				<div class="agileits_search">
-					<form action="#" method="post">
-						<input name="Search" type="text" placeholder="Search" required="">
-						<select id="agileinfo_search" name="agileinfo_search">
-							<option value="commodities">Commodities</option>
-							<option value="navs">NAVs</option>
-							<option value="quotes">Quotes</option>
-							<option value="videos">Videos</option>
-							<option value="news">News</option>
-							<option value="notices">Notices</option>
-							<option value="all">All</option>
-						</select>
-						<input type="submit" value="Search">
-					</form>
-				</div>
-				<div class="clearfix"> </div>
+<div class="header">
+	<div class="w3ls_header_top">
+		<div class="container">
+			<div class="w3l_header_left">
 			</div>
 		</div>
 	</div>
+	<div class="w3ls_header_middle">
+		<div class="container">
+			<div class="agileits_logo">
+				<h1><a href="/home/"><span>World</span> of Commerce<i>Trade anytime anywhere</i></a></h1>
+		</div>
+	</div>
+</div>
 <!-- //header -->
 <!-- navigation -->
-	<div class="trade_navigation">
-		<div class="container">
-			<nav class="navbar nav_bottom">
-			 <!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header nav_2">
-				  <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+<div class="trade_navigation">
+	<div class="container">
+		<nav class="navbar nav_bottom">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header nav_2">
+				<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-				  </button>
-				</div>
-				<!-- Main Nav Bar START-->
-				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-					<nav class="wthree_nav">
-						<ul class="nav navbar-nav nav_1" style="width: 100%;">
-							<li><a href="/home/">Home</a></li>
-							<li><a href="/equity/">Live Market Watch</a></li>
-							<!-- <li><a href="news/">News</a></li> -->
-							
-							<li><a href="/contact/">Contact Us</a></li>
-							<li><a href="/single/">Past Data Stock</a></li>
-							<li style="float: right;"><a href="/signup/" id="user-register" >Register</a> </li>
-						    <li style="float: right;"><a href="/login/" id="user-login">Login</a> </li>
-	<script type="text/javascript" src="{% static "js/cookieChecker.js" %}" ></script>
-	{% if DBalance == False %}
+				</button>
+			</div>
+			<!-- Main Nav Bar START-->
+			<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+				<nav class="wthree_nav">
+					<ul class="nav navbar-nav nav_1" style="width: 100%;">
+						<li><a href="/home/">Home</a></li>
+						<li><a href="/equity/"><span class="label label-success"> LIVE</span> Market Watch</a></li>
+						<!-- <li><a href="news/">News</a></li> -->
 
-{% else %}
-<li style="float: right;"><a href="/user/">Balance : {{DBalance}}</a></li>
-{% endif %}
-						</ul>
-					</nav>
-				</div>
-				<!-- Main Nav Bar END -->
-			</nav>
-		</div>
+
+						<li><a href="/contact/">Contact Us</a></li>
+						<li><a href="/single/">Stock's Previous Data</a></li>
+						{% if DBalance == False %}
+						<li style="float: right;"><a href="/signup/" >Register</a> </li>
+						<li style="float: right;"><a href="/login/" >Login</a> </li>
+						{% else %}
+						<li style="float: right;"><a href="/user/">Balance : {{DBalance}}</a></li>
+						<li style="float: right;"><a href="/dashboard/" >Dashboard</a> </li>
+						<li style="float: right;"><a href="/logout/" >Logout</a> </li>
+						{% endif %}
+
+					</ul>
+				</nav>
+			</div>
+			<!-- Main Nav Bar END -->
+		</nav>
 	</div>
+</div>
+<!-- //navigation -->
 
-{% if market_status == True and session_status == True%}
+{% if market_status == True and session_status == True %}
 {% if less_balance == True %}
 <div class="container" style="background-color: black; padding:15px 15px 15px 15px; width:100%">
 	<div class="row">
@@ -276,7 +267,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<ul class="agileits_w3layouts_footer_info">
 			<li><a href="/home/">Home</a><i>|</i></li>
 			
-			<li><a href="/about/">About Us</a><i>|</i></li>
+			<li><a href="/about/">About Us</a></li>
 			
 		</ul>
 	</div>
