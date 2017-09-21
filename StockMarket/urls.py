@@ -58,4 +58,4 @@ urlpatterns = [
     # Live Data Call
     url(r'^live/',live)
 ]
-# Project.PreviousData.dataFetcher()
+Project.PreviousData.dataFetcher()

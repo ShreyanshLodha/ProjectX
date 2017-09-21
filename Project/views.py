@@ -3,7 +3,7 @@ from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_control
-from Project.models import customer,historical_data,shares,buy_transaction,sell_transaction
+from Project.models import customer,historical_data,shares,buy_transaction,sell_transaction,brokerage,inventory
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib.pylab import rcParams
@@ -67,7 +67,6 @@ def signup(request):
         return HttpResponseRedirect("/dashboard/")
     return render_to_response("sign-up.html")
 @csrf_exempt
-@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def single(request):
     # Delete old graph
     original_dir = os.getcwd()
@@ -226,12 +225,28 @@ def user(request):
 
 def pasttransaction(request):
     if 'user-trade' in request.COOKIES and 'email' in request.session:
+        user_email = request.session['email']
+        get_id = list(customer.objects.values_list('cid',flat=True).filter(email=user_email))
+        get_id = get_id[0]
+        data = list(buy_transaction.objects.filter(cid_id=get_id).values_list('b_tid','quantity','buyrate', 'sid_id', 'impact'))
+        print(data)
+        mod_data = []
+        for items in data:
+            temp = []
+            for i in items:
+                temp.append(i)
+            mod_data.append(temp)
+        for item in mod_data:
+            stock_name = list(shares.objects.values_list('stock_name',flat=True).filter(sid=item[3]))
+            item[3] = stock_name[0]
+
         old_bal = False
         if 'email' in request.session:
             old_bal = list(
                 customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
             old_bal = old_bal[0]
-        return render_to_response("pasttransaction.html",{'DBalance':old_bal})
+        return render_to_response("pasttransaction.html",{'DBalance':old_bal,
+                                                          "data":mod_data})
     else:
         return HttpResponseRedirect("/login-required/")
 
@@ -393,7 +408,7 @@ def live(request):
         session_status = True
 
         if 'Buy' in request.POST :
-            price = float(details[6])
+            price = float(details[6].replace(",",""))
             quantity = int(request.POST['stock_qty'])
             c_obj = customer.objects.get(email=str(request.session['email']))
 
@@ -402,8 +417,8 @@ def live(request):
                 transaction_done = False
             else :
                 impact = round(float(price*quantity), 2)
-                brokerage = round(((impact*0.5)/100), 2)
-                impact = (impact + brokerage)*(-1)
+                brokerage_amt = round(((impact*0.5)/100), 2)
+                impact = round(((impact + brokerage_amt)*(-1)),2)
                 s_obj = shares.objects.get(sid=share_id_from_url)
                 transaction = buy_transaction(cid_id=c_obj.cid, quantity=quantity, sid_id=s_obj.sid,
                                           buyrate=price,impact=impact)
@@ -415,17 +430,33 @@ def live(request):
                 old_bal = balance
                 get_id = list(buy_transaction.objects.filter(cid_id=c_obj.cid, quantity=quantity, sid_id=s_obj.sid,
                                           buyrate=price,impact=impact).values_list('b_tid', flat=True))
-                desc = [get_id[0],price,quantity,brokerage]
+                desc = [get_id[0],price,quantity,brokerage_amt]
+
+                b_obj = brokerage(sid_id=s_obj.sid,cid_id=c_obj.cid,tid=get_id[0],type='BUY',brokerage=brokerage_amt)
+                b_obj.save()
+                buy = inventory.objects.filter(sid_id=s_obj.sid,cid_id=c_obj.cid)\
+                    .values_list('buy_qty','amount')
+                if not buy:
+                    i_obj = inventory(sid_id=s_obj.sid,cid_id=c_obj.cid,buy_qty=quantity,sell_qty=0,amount=impact)
+                    i_obj.save()
+                else:
+                    temp = [buy[0][0], buy[0][1]]
+                    temp[0] = temp[0]+quantity
+                    temp[1] = temp[1]+impact
+                    inventory.objects.filter(sid_id=s_obj.sid,cid_id=c_obj.cid).\
+                        update(buy_qty=temp[0],amount=temp[1])
+
+                print(inventory.objects.get(cid_id=c_obj.cid,sid_id=s_obj.sid))
 
         elif 'Sell' in request.POST:
             print("Sell")
+            # Logic for selling expected.
 
 
-    print(desc)
     return render_to_response("Live.html", {'data':details,
                                             'DBalance':old_bal,
                                             'stock_id':share_id_from_url,
-                                            'market_status':time_data['MarketStatus'],
+                                            'market_status':True,
                                             'session_status':session_status,
                                             'less_balance':less_balance,
                                             'transaction_done':transaction_done,

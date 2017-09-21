@@ -42,3 +42,18 @@ class historical_data(models.Model):
 	lowest_p =  models.FloatField(null=False)
 	date = models.DateField(null=False)
 
+class inventory(models.Model):
+	sid = models.ForeignKey(shares)
+	cid = models.ForeignKey(customer)
+	buy_qty = models.IntegerField(null=False)
+	sell_qty = models.IntegerField(null=False)
+	amount = models.FloatField(null=False)
+
+class brokerage(models.Model):
+	sid = models.ForeignKey(shares)
+	cid = models.ForeignKey(customer)
+	tid = models.IntegerField(null=False)
+	transaction_type = (("BUY","Buy Transaction"),("SELL","Sell Transaction"))
+	type = models.CharField(max_length=4,choices=transaction_type)
+	brokerage = models.FloatField(null=False)
+
