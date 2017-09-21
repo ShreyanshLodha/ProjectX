@@ -228,16 +228,30 @@ def pasttransaction(request):
         user_email = request.session['email']
         get_id = list(customer.objects.values_list('cid',flat=True).filter(email=user_email))
         get_id = get_id[0]
+
+        #  Buy transaction table data for user.
         data = list(buy_transaction.objects.filter(cid_id=get_id).values_list('b_tid','quantity','buyrate', 'sid_id', 'impact'))
-        print(data)
-        mod_data = []
+        mod_data_buy = []
         for items in data:
             temp = []
             for i in items:
                 temp.append(i)
-            mod_data.append(temp)
-        for item in mod_data:
+            mod_data_buy.append(temp)
+        for item in mod_data_buy:
             stock_name = list(shares.objects.values_list('stock_name',flat=True).filter(sid=item[3]))
+            item[3] = stock_name[0]
+
+        # sell table data for logged in user
+
+        data = list(sell_transaction.objects.filter(cid_id=get_id).values_list('s_tid', 'quantity', 'sellrate', 'sid_id','impact'))
+        mod_data_sell = []
+        for items in data:
+            temp = []
+            for i in items:
+                temp.append(i)
+            mod_data_sell.append(temp)
+        for item in mod_data_sell:
+            stock_name = list(shares.objects.values_list('stock_name', flat=True).filter(sid=item[3]))
             item[3] = stock_name[0]
 
         old_bal = False
@@ -245,8 +259,12 @@ def pasttransaction(request):
             old_bal = list(
                 customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
             old_bal = old_bal[0]
+
+
+
         return render_to_response("pasttransaction.html",{'DBalance':old_bal,
-                                                          "data":mod_data})
+                                                          "buy_data":mod_data_buy,
+                                                          "sell_data":mod_data_sell})
     else:
         return HttpResponseRedirect("/login-required/")
 
