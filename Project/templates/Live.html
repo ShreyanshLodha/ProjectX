@@ -118,11 +118,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 {% endif %}
-{% if transaction_done == True %}
+{% if transaction_done == True and transaction_type == "BUY" %}
 <div class="container" style="background-color: black; padding:15px 15px 15px 15px; width:100%">
 	<div class="row">
 		<center>
-			<div class="col-md-12"><p style="color:white;"><strong>Stock Purchased.</strong> Transaction ID {{desc.0}},  Price {{desc.1}},  Quantity {{desc.2}},  Brokerage Charges {{desc.3}}.</p></div>
+			<div class="col-md-12"><p style="color:white;"><strong>Stock Purchased.</strong> Transaction ID {{desc.0}}, at Price {{desc.1}},  Quantity {{desc.2}},  Brokerage Charges {{desc.3}}.</p></div>
+		</center>
+	</div>
+</div>
+{% elif transaction_done == True and transaction_type == "SELL" %}
+<div class="container" style="background-color: black; padding:15px 15px 15px 15px; width:100%">
+	<div class="row">
+		<center>
+			<div class="col-md-12"><p style="color:white;"><strong>Stock Sold.</strong> Transaction ID {{desc.0}}, at Price {{desc.1}},  Quantity {{desc.2}},  Brokerage Charges {{desc.3}}.</p></div>
 		</center>
 	</div>
 </div>

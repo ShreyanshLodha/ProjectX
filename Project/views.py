@@ -401,6 +401,7 @@ def live(request):
     transaction_done = False
     less_balance = False
     desc = []
+    transaction_type = ""
 
     if 'email' in request.session:
         old_bal = list(customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
@@ -413,44 +414,115 @@ def live(request):
             c_obj = customer.objects.get(email=str(request.session['email']))
 
             if c_obj.balance < price * quantity:
+                # script enter's here if the balance is insufficient
                 less_balance = True
                 transaction_done = False
-            else :
+            else:
+                # script enter's here when transactions can take place
+
+                # calculate the impact and brokerage
                 impact = round(float(price*quantity), 2)
                 brokerage_amt = round(((impact*0.5)/100), 2)
                 impact = round(((impact + brokerage_amt)*(-1)),2)
+
+                # get share object for the selected share
                 s_obj = shares.objects.get(sid=share_id_from_url)
-                transaction = buy_transaction(cid_id=c_obj.cid, quantity=quantity, sid_id=s_obj.sid,
-                                          buyrate=price,impact=impact)
+
+                # insert data into buy_transaction table
+                transaction = buy_transaction(cid_id=c_obj.cid,
+                                              quantity=quantity,
+                                              sid_id=s_obj.sid,
+                                              buyrate=price,
+                                              impact=impact)
+                transaction.save()
+
+                # recalculate balance and update in customer table
                 balance = c_obj.balance + impact
                 customer.objects.filter(cid=c_obj.cid).update(balance=balance)
-                transaction.save()
-                transaction_done = True
-                less_balance = False
-                old_bal = balance
-                get_id = list(buy_transaction.objects.filter(cid_id=c_obj.cid, quantity=quantity, sid_id=s_obj.sid,
-                                          buyrate=price,impact=impact).values_list('b_tid', flat=True))
-                desc = [get_id[0],price,quantity,brokerage_amt]
 
-                b_obj = brokerage(sid_id=s_obj.sid,cid_id=c_obj.cid,tid=get_id[0],type='BUY',brokerage=brokerage_amt)
+                # make dict of the instance of buy_transaction
+                buy_dict = transaction.__dict__
+
+
+                # Add brokerage_amt to brokerage table
+                b_obj = brokerage(sid_id=s_obj.sid,cid_id=c_obj.cid,tid=buy_dict['b_tid'],type='BUY',brokerage=brokerage_amt)
                 b_obj.save()
+
+
+                # Creat / Update row in inventory table
                 buy = inventory.objects.filter(sid_id=s_obj.sid,cid_id=c_obj.cid)\
                     .values_list('buy_qty','amount')
                 if not buy:
+                    # if no prvious record exists
                     i_obj = inventory(sid_id=s_obj.sid,cid_id=c_obj.cid,buy_qty=quantity,sell_qty=0,amount=impact)
                     i_obj.save()
                 else:
+                    # if data exists
                     temp = [buy[0][0], buy[0][1]]
                     temp[0] = temp[0]+quantity
                     temp[1] = temp[1]+impact
                     inventory.objects.filter(sid_id=s_obj.sid,cid_id=c_obj.cid).\
                         update(buy_qty=temp[0],amount=temp[1])
 
-                print(inventory.objects.get(cid_id=c_obj.cid,sid_id=s_obj.sid))
+                # update display stuff
+                old_bal = balance
+                transaction_done = True
+                less_balance = False
+                desc = [buy_dict['b_tid'], price, quantity, brokerage_amt]
+                transaction_type = "BUY"
+
 
         elif 'Sell' in request.POST:
-            print("Sell")
-            # Logic for selling expected.
+            # Logic for selling stock..
+            price = float(details[6].replace(",", ""))
+            quantity = int(request.POST['stock_qty'])
+            c_obj = customer.objects.get(email=str(request.session['email']))
+            s_obj = shares.objects.get(sid=share_id_from_url)
+
+            impact = round(price*quantity)
+            brokerage_amt = round((impact*0.5)/100)
+            impact = impact-brokerage_amt
+
+            # Put data in sell_transaction table
+            sell_t = sell_transaction(cid_id=c_obj.cid,
+                                      quantity=quantity,
+                                      sid_id=s_obj.sid,
+                                      sellrate=price,
+                                      impact=impact)
+
+            sell_t.save()
+
+            # create dictionary of sell table instance
+            sell_dict = sell_t.__dict__
+
+            # update / create record in inventory
+            sell = inventory.objects.filter(sid_id=s_obj.sid, cid_id=c_obj.cid) \
+                .values_list('sell_qty', 'amount')
+            if not sell:
+                # if not record exists
+                i_obj = inventory(sid_id=s_obj.sid, cid_id=c_obj.cid, buy_qty=0, sell_qty=quantity, amount=impact)
+                i_obj.save()
+            else:
+                temp = [sell[0][0], sell[0][1]]
+                temp[0] = temp[0] + quantity
+                temp[1] = temp[1] + impact
+                inventory.objects.filter(sid_id=s_obj.sid, cid_id=c_obj.cid). \
+                    update(sell_qty=temp[0], amount=temp[1])
+
+            # add brokerage in brokerage table
+            b_obj = brokerage(sid_id=s_obj.sid, cid_id=c_obj.cid, tid=sell_dict['s_tid'], type='SELL',
+                              brokerage=brokerage_amt)
+            b_obj.save()
+
+            # recalculate balance and update in customer table
+            balance = c_obj.balance + impact
+            customer.objects.filter(cid=c_obj.cid).update(balance=balance)
+            # update display stuff
+            old_bal = balance
+            transaction_done = True
+            less_balance = False
+            desc = [sell_dict['s_tid'], price, quantity, brokerage_amt]
+            transaction_type = "BUY"
 
 
     return render_to_response("Live.html", {'data':details,
@@ -460,4 +532,5 @@ def live(request):
                                             'session_status':session_status,
                                             'less_balance':less_balance,
                                             'transaction_done':transaction_done,
+                                            'transaction_type':transaction_type,
                                             'desc':desc})
