@@ -189,7 +189,65 @@ def single(request):
 @csrf_exempt
 def dashboard(request):
     if 'user-trade' in request.COOKIES and 'email' in request.session:
-        return render_to_response("dashboard.html")
+        # display Inventory and brokerage data.
+
+        # get customer's detail
+        c_obj = customer.objects.get(email=str(request.session['email']))
+
+        # Inventory
+        data = list(inventory.objects.filter(cid_id=c_obj.cid).values_list('sid_id', 'buy_qty', 'sell_qty', 'amount'))
+
+        inventory_data = []
+
+        for items in data:
+            temp = [items[0], items[1]-items[2], items[3]]
+            if temp[1] != 0:
+                inventory_data.append(temp)
+
+        # Show stock name instead of stock id
+        for item in inventory_data:
+            stock_name = list(shares.objects.values_list('stock_name',flat=True).filter(sid=item[0]))
+            item[0] = stock_name[0]
+
+        # Cleared transaction summary
+        cleared_inventory_data = []
+        profit_loss = 0
+        for items in data:
+            temp = [items[0], items[3]]
+
+            if items[1]-items[2] == 0:
+                profit_loss += items[3]
+                cleared_inventory_data.append(temp)
+
+        # Show stock name instead of stock id
+        for item in cleared_inventory_data:
+            stock_name = list(shares.objects.values_list('stock_name',flat=True).filter(sid=item[0]))
+            item[0] = stock_name[0]
+
+
+        # Brokerage
+        data = list(brokerage.objects.filter(cid_id=c_obj.cid).values_list('sid_id', 'tid', 'type', 'brokerage'))
+
+        brokerage_data = []
+        total_brokerage = 0
+        for items in data:
+            total_brokerage = total_brokerage + items[3]
+            temp = []
+            for i in items:
+                temp.append(i)
+            brokerage_data.append(temp)
+
+        # Show stock name instead of stock id
+        for item in brokerage_data:
+            stock_name = list(shares.objects.values_list('stock_name',flat=True).filter(sid=item[0]))
+            item[0] = stock_name[0]
+
+
+        return render_to_response("dashboard.html", {'inventory_data':inventory_data,
+                                                     'cleared_data':cleared_inventory_data,
+                                                     'profit_loss':profit_loss,
+                                                     'brokerage_data':brokerage_data,
+                                                     'total_brokerage': total_brokerage})
     if request.method == 'POST':
         username = str(request.POST['username'])
         password = str(request.POST['password'])
@@ -242,7 +300,6 @@ def pasttransaction(request):
             item[3] = stock_name[0]
 
         # sell table data for logged in user
-
         data = list(sell_transaction.objects.filter(cid_id=get_id).values_list('s_tid', 'quantity', 'sellrate', 'sid_id','impact'))
         mod_data_sell = []
         for items in data:

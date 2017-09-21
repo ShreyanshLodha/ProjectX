@@ -3,6 +3,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <title>Dashboard</title>
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="{% static "image-dsb/favicon.ico" %}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -48,7 +49,7 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="/equity/" class="simple-text">
-                    Live Market Watch
+                    <span class="label label-success">LIVE</span> Market Watch
                 </a>
             </div>
 
@@ -56,7 +57,7 @@
                 <li class="active">
                     <a href="/dashboard/">
                         <i class="pe-7s-graph"></i>
-                        <p>Market Watch</p>
+                        <p>User Portal</p>
                     </a>
                 </li>
                 <li>
@@ -71,36 +72,6 @@
                         <p>Past Transaction</p>
                     </a>
                 </li>
-                <!-- <li> -->
-                    <!-- <a href="typography.html"> -->
-                        <!-- <i class="pe-7s-news-paper"></i> -->
-                        <!-- <p>Typography</p> -->
-                    <!-- </a> -->
-                <!-- </li> -->
-                <!-- <li> -->
-                    <!-- <a href="icons.html"> -->
-                        <!-- <i class="pe-7s-science"></i> -->
-                        <!-- <p>Icons</p> -->
-                    <!-- </a> -->
-                <!-- </li> -->
-                <!-- <li> -->
-                    <!-- <a href="maps.html"> -->
-                        <!-- <i class="pe-7s-map-marker"></i> -->
-                        <!-- <p>Maps</p> -->
-                    <!-- </a> -->
-                <!-- </li> -->
-                <!-- <li> -->
-                    <!-- <a href="notifications.html"> -->
-                        <!-- <i class="pe-7s-bell"></i> -->
-                        <!-- <p>Notifications</p> -->
-                    <!-- </a> -->
-                <!-- </li> -->
-				<!-- <li class="active-pro"> -->
-                    <!-- <a href="upgrade.html"> -->
-                        <!-- <i class="pe-7s-rocket"></i> -->
-                        <!-- <p>Upgrade to PRO</p> -->
-                    <!-- </a> -->
-                <!-- </li> -->
             </ul>
     	</div>
     </div>
@@ -115,7 +86,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Market</a><span style="background-color: #00AA00;
+                    <a class="navbar-brand" href="/dashboard/">User Portal</a><span style="background-color: #00AA00;
                                                     position: relative;
                                                     top: 18px;
                                                     padding: 10px 10px 10px 10px;
@@ -144,10 +115,129 @@
                 </div>
             </div>
         </nav>
-
-
         <div class="content">
             <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title"><strong>Inventory</strong></h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th><strong>Stock Name</strong></th>
+                                    	<th><strong>Quantity</strong></th>
+                                        <th><strong>Amount ( Including Brokerage )</strong></th>
+                                    </thead>
+                                    <tbody>
+                                    {% if inventory_data %}
+                                    {% for item in inventory_data %}
+                                        <tr>
+                                        	<td>{{ item.0 }}</td>
+                                        	<td>{{ item.1 }}</td>
+                                        	<td>{{ item.2 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td colspan="3"><strong>Note </strong>: There is a possibility of having a negative value in quantity. Negative values infer that the stock has been sold and yet to be bought.</td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="3">No Transactions made.</td>
+                                    </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title"><strong>Cleared Transactions</strong></h4>
+                                <p class="category">Trade Summary</p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th><strong>Stock Name</strong></th>
+                                    	<th><strong>Profit</strong></th>
+                                    	<th><strong>Loss</strong></th>
+                                    </thead>
+                                    <tbody>
+                                    {% if cleared_data %}
+                                    {% for item in cleared_data %}
+                                        <tr>
+                                        	<td>{{ item.0 }}</td>
+                                            {% if item.1 >= 0 %}
+                                        	<td>{{ item.1 }}</td>
+                                            <td></td>
+                                            {% else %}
+                                            <td></td>
+                                        	<td>{{ item.1 }}</td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td colspan="2"><strong>Profit / Loss for cleared Transaction.</strong></td>
+                                        <td><strong>{{ profit_loss }}</strong></td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="3">No Transactions Cleared.</td>
+                                    </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title"><strong>Brokerage Paid</strong></h4>
+                                <p class="category">Buy and Sell Transaction.</p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <th><strong>Stock Name</strong></th>
+                                        <th><strong>Transaction Type</strong></th>
+                                    	<th><strong>Transaction Number with relevance to Transaction Type</strong></th>
+                                    	<th><strong></strong>Amount</strong></th>
+                                    </thead>
+                                    <tbody>
+                                    {% if brokerage_data %}
+                                    {% for item in brokerage_data %}
+                                        <tr>
+                                        	<td>{{ item.0 }}</td>
+                                        	<td>{{ item.2 }}</td>
+                                        	<td>{{ item.1 }}</td>
+                                        	<td>{{ item.3 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td colspan="3"> <strong>Total Brokerage Paid</strong></td>
+                                        <td><strong>{{ total_brokerage }}</strong></td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="3">No Transactions made.</td>
+                                    </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
