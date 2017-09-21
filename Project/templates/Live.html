@@ -108,7 +108,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 
-{% if Balance_avail and session_exist %}
+{% if market_status == True and session_status == True%}
+{% if less_balance == True %}
 <div class="container" style="background-color: black; padding:15px 15px 15px 15px; width:100%">
 	<div class="row">
 		<center>
@@ -117,7 +118,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div>
 {% endif %}
-
+{% if transaction_done == True %}
+<div class="container" style="background-color: black; padding:15px 15px 15px 15px; width:100%">
+	<div class="row">
+		<center>
+			<div class="col-md-12"><p style="color:white;"><strong>Stock Purchased.</strong> Transaction ID {{desc.0}},  Price {{desc.1}},  Quantity {{desc.2}},  Brokerage Charges {{desc.3}}.</p></div>
+		</center>
+	</div>
+</div>
+{% endif %}
 <!-- //navigation -->
 
 
@@ -126,17 +135,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<center>
 	<div class="row">
 		<div class="col-md-12">
-<form class="form-inline" action="//" method="post">
+<form class="form-inline" action="/live/{{stock_id}}" method="post">
   <div class="form-group" style="padding-left: 10px;">
-    <input type="hidden" class="form-control" name="stock_id" > <!-- Set stock id here received from django-->
+    <input type="hidden" class="form-control" name="stock_id"  > <!-- Set stock id here received from django-->
   </div>
   <div class="form-group" style="padding-left: 10px;">
     <label for="stock_price">Stock Price</label>
-    <input type="number" class="form-control" id="stock_price" name="stock_price" disabled> <!-- Set stock price here received from django-->
+    <input type="number" class="form-control" id="stock_price" name="stock_price" value="{{data.6}}" name="stock_price" disabled> <!-- Set stock price here received from django-->
   </div>
   <div class="form-group" style="padding-left: 10px;">
     <label for="stock_qty">Quantity</label>
-    <input type="number" min="1" class="form-control" id="stock_qty" placeholder="Minimum 1">
+    <input type="number" min="1" class="form-control" name="stock_qty"id="stock_qty" placeholder="Minimum 1">
   </div>
 	<div class="form-group" style="padding-left: 10px;">
     <label for="stock_brokerage">Brokerage per transaction</label>
@@ -149,6 +158,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	</center>
 </div>
+{% endif %}
 
 	<div class="container">
 		<div class="agileinfo_news_original_grids w3_agile_news_market_grids">

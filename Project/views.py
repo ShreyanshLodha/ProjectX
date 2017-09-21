@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import cache_control
 from Project.models import customer,historical_data,shares,buy_transaction,sell_transaction
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -62,8 +63,11 @@ def services(request):
     return render_to_response("service.html",{'DBalance':old_bal})
 
 def signup(request):
+    if 'email' in request.session:
+        return HttpResponseRedirect("/dashboard/")
     return render_to_response("sign-up.html")
 @csrf_exempt
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def single(request):
     # Delete old graph
     original_dir = os.getcwd()
@@ -248,7 +252,7 @@ def register_user(request):
             user.save()
             return render_to_response("index.html")
     else:
-        return HttpResponseRedirect("/home/")
+        return HttpResponseRedirect("/dashboard/")
 
 def logout(request):
     response = HttpResponseRedirect('/home/')
@@ -324,7 +328,7 @@ def update_details(request):
             old_bal = old_bal[0]
         return render_to_response('dashboard.html',{'message':True,'DBalance':old_bal})
 
-
+@csrf_exempt
 def live(request):
     time_data = Project.LiveGraph.time_analysis()
 
@@ -378,8 +382,51 @@ def live(request):
     details = Project.LiveGraph.get_detailed_info(google_id)
 
     old_bal = False
+    session_status = False
+    transaction_done = False
+    less_balance = False
+    desc = []
+
     if 'email' in request.session:
         old_bal = list(customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
         old_bal = old_bal[0]
+        session_status = True
 
-    return render_to_response("Live.html", {'data':details, 'DBalance':old_bal})
+        if 'Buy' in request.POST :
+            price = float(details[6])
+            quantity = int(request.POST['stock_qty'])
+            c_obj = customer.objects.get(email=str(request.session['email']))
+
+            if c_obj.balance < price * quantity:
+                less_balance = True
+                transaction_done = False
+            else :
+                impact = round(float(price*quantity), 2)
+                brokerage = round(((impact*0.5)/100), 2)
+                impact = (impact + brokerage)*(-1)
+                s_obj = shares.objects.get(sid=share_id_from_url)
+                transaction = buy_transaction(cid_id=c_obj.cid, quantity=quantity, sid_id=s_obj.sid,
+                                          buyrate=price,impact=impact)
+                balance = c_obj.balance + impact
+                customer.objects.filter(cid=c_obj.cid).update(balance=balance)
+                transaction.save()
+                transaction_done = True
+                less_balance = False
+                old_bal = balance
+                get_id = list(buy_transaction.objects.filter(cid_id=c_obj.cid, quantity=quantity, sid_id=s_obj.sid,
+                                          buyrate=price,impact=impact).values_list('b_tid', flat=True))
+                desc = [get_id[0],price,quantity,brokerage]
+
+        elif 'Sell' in request.POST:
+            print("Sell")
+
+
+    print(desc)
+    return render_to_response("Live.html", {'data':details,
+                                            'DBalance':old_bal,
+                                            'stock_id':share_id_from_url,
+                                            'market_status':time_data['MarketStatus'],
+                                            'session_status':session_status,
+                                            'less_balance':less_balance,
+                                            'transaction_done':transaction_done,
+                                            'desc':desc})
