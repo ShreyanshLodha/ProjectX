@@ -4,7 +4,7 @@
 <head>
     <title>Past Transaction</title>
 	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="{% static "img/favicon.ico" %}">
+	<link rel="icon" type="image/png" href="{% static "images/favicon.ico" %}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title></title>
@@ -105,10 +105,26 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
+                    {% if asked == True %}
+                    <div class="col-md-12" style="padding: 10px 10px 10px 10px;"><p>Current Stock : <strong>{{ s_name }}</strong></p></div>
+                    {% endif %}
+                    <form method="post" action="/past-transaction/">
+                    <div class="col-md-9" style="padding-bottom: 30px;">
+                        <select class="form-control" name="share">
+                            <option value="0" id="0">-- All --</option>
+                            {% for item in worked %}
+                            <option value="{{ item.0 }}" id="{{ item.0 }}">{{ item.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+					<div class="col-sm-3">
+						<input type="submit" class="btn btn-primary" value="Submit" style="width: 100%;"/>
+					</div>
+                    </form>
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Buy Transaction</h4>
+                                <h4 class="title"><strong>Buy Transaction</strong></h4>
                                 <p class="category">All Transactions</p>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -125,7 +141,7 @@
                                     {% for item in buy_data %}
                                         <tr>
                                         	<td>{{ item.0 }}</td>
-                                        	<td>{{ item.3 }}</td>
+                                            <td><strong>{{ item.3 }}</strong></td>
                                         	<td>{{ item.1 }}</td>
                                         	<td>{{ item.2 }}</td>
                                         	<td>{{ item.4 }}</td>
@@ -147,7 +163,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Sell Transaction</h4>
+                                <h4 class="title"><strong>Sell Transaction</strong></h4>
                                 <p class="category">All Transactions.</p>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -164,7 +180,7 @@
                                     {% for item in sell_data %}
                                         <tr>
                                         	<td>{{ item.0 }}</td>
-                                        	<td>{{ item.3 }}</td>
+                                            <td><strong>{{ item.3 }}</strong></td>
                                         	<td>{{ item.1 }}</td>
                                         	<td>{{ item.2 }}</td>
                                         	<td>{{ item.4 }}</td>

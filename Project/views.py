@@ -3,6 +3,8 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from Project.models import customer,historical_data,shares,buy_transaction,sell_transaction,brokerage,inventory
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import hashlib
@@ -12,6 +14,8 @@ from django.core.mail import send_mail
 from random import randint
 import Project.LiveGraph
 import dateutil
+from django.core.cache import cache
+from django.views.decorators.cache import never_cache
 
 # Create your views here.
 def about(request):
@@ -66,8 +70,12 @@ def signup(request):
     if 'email' in request.session:
         return HttpResponseRedirect("/dashboard/")
     return render_to_response("sign-up.html")
+
+
 @csrf_exempt
+@never_cache
 def single(request):
+    cache.delete('http://127.0.0.1:8000/single/')
     # Delete old graph
     original_dir = os.getcwd()
     os.chdir('Project/static/images/')
@@ -158,7 +166,9 @@ def single(request):
 
         # save in static/image folder
         os.chdir('Project/static/images/')
-        plt.savefig("graph.png")
+        fig = matplotlib.pyplot.gcf()
+        fig.set_size_inches(9.5, 5)
+        plt.savefig("graph.png",dpi=100)
         os.chdir(original_dir)
 
         # clean graph and close graph content
@@ -218,6 +228,44 @@ def dashboard(request):
             if items[1]-items[2] == 0:
                 profit_loss += items[3]
                 cleared_inventory_data.append(temp)
+            else:
+                buy_stuff = list(buy_transaction.objects.filter(sid_id= items[0], cid_id=c_obj.cid).values_list('quantity',flat=True))
+                sell_stuff = list(sell_transaction.objects.filter(sid_id=items[0], cid_id=c_obj.cid).values_list('quantity', flat=True))
+                b_total = sum(buy_stuff)
+                s_total = sum(sell_stuff)
+                buy_impact = list(
+                    buy_transaction.objects.filter(sid_id=items[0], cid_id=c_obj.cid).values_list('buyrate',
+                                                                                                  flat=True))
+                sell_impact = list(
+                    sell_transaction.objects.filter(sid_id=items[0], cid_id=c_obj.cid).values_list('sellrate',
+                                                                                                   flat=True))
+                b_impact_total = sum(buy_impact)
+                s_impact_total = sum(sell_impact)
+                buy = zip(buy_stuff,buy_impact)
+                sell = zip(sell_stuff,sell_impact)
+
+                bt = 0
+                for i in buy:
+                    bt += i[0]*i[1]
+                bt = bt + (bt * (0.50/100))
+
+                st = 0
+                for i in sell:
+                    st += i[0]*i[1]
+                st = st + (st * (0.50/100))
+
+                if b_total < s_total :
+                    b_total = st - bt - items[3]
+                    t = [items[0],b_total]
+                    cleared_inventory_data.append(t)
+                    profit_loss += b_total
+                else:
+                    s_total = st - bt + items[3]
+                    t = [items[0], s_total]
+                    cleared_inventory_data.append(t)
+                    profit_loss += s_total
+
+        profit_loss = round(profit_loss,2)
 
         # Show stock name instead of stock id
         for item in cleared_inventory_data:
@@ -236,6 +284,7 @@ def dashboard(request):
             for i in items:
                 temp.append(i)
             brokerage_data.append(temp)
+        total_brokerage = round(total_brokerage,2)
 
         # Show stock name instead of stock id
         for item in brokerage_data:
@@ -281,14 +330,44 @@ def user(request):
     else:
         return HttpResponseRedirect("/login-required/")
 
+@csrf_exempt
 def pasttransaction(request):
     if 'user-trade' in request.COOKIES and 'email' in request.session:
         user_email = request.session['email']
         get_id = list(customer.objects.values_list('cid',flat=True).filter(email=user_email))
         get_id = get_id[0]
 
+        asked = False
+        worked_list = []
+        worked_stock_name = []
+        s = 0
+        s_name = ""
+        if True:
+            c_obj = customer.objects.get(email=str(request.session['email']))
+            # get list of all the data user has worked in
+            worked_list = list(inventory.objects.filter(cid_id=c_obj.cid).values_list('sid_id', flat=True).distinct())
+
+            for items in worked_list:
+                temp = list(shares.objects.filter(sid=items).values_list('stock_name', flat=True))
+                worked_stock_name.append(temp[0])
+
+            if request.method == 'POST' and 'share' in request.POST:
+                asked = True
+                s = int(request.POST['share'])
+                if s == 0:
+                    asked = False
+
+
+
+
         #  Buy transaction table data for user.
-        data = list(buy_transaction.objects.filter(cid_id=get_id).values_list('b_tid','quantity','buyrate', 'sid_id', 'impact'))
+        data = ""
+        if asked:
+            data = list(buy_transaction.objects.filter(cid_id=get_id, sid_id=s).values_list('b_tid','quantity','buyrate', 'sid_id', 'impact'))
+        else:
+            data = list(
+                buy_transaction.objects.filter(cid_id=get_id).values_list('b_tid', 'quantity', 'buyrate',
+                                                                                    'sid_id', 'impact'))
         mod_data_buy = []
         for items in data:
             temp = []
@@ -299,8 +378,17 @@ def pasttransaction(request):
             stock_name = list(shares.objects.values_list('stock_name',flat=True).filter(sid=item[3]))
             item[3] = stock_name[0]
 
+        if asked :
+            s_name = mod_data_buy[0][3]
+
         # sell table data for logged in user
-        data = list(sell_transaction.objects.filter(cid_id=get_id).values_list('s_tid', 'quantity', 'sellrate', 'sid_id','impact'))
+        data = ""
+        if asked:
+            data = list(sell_transaction.objects.filter(cid_id=get_id, sid_id=s).values_list('s_tid', 'quantity', 'sellrate', 'sid_id','impact'))
+        else:
+            data = list(
+                sell_transaction.objects.filter(cid_id=get_id).values_list('s_tid', 'quantity', 'sellrate',
+                                                                                     'sid_id', 'impact'))
         mod_data_sell = []
         for items in data:
             temp = []
@@ -311,17 +399,26 @@ def pasttransaction(request):
             stock_name = list(shares.objects.values_list('stock_name', flat=True).filter(sid=item[3]))
             item[3] = stock_name[0]
 
+        if asked and s_name is "" :
+            s_name = mod_data_sell[0][3]
+
         old_bal = False
         if 'email' in request.session:
             old_bal = list(
                 customer.objects.values_list('balance', flat=True).filter(email=str(request.session['email'])))
             old_bal = old_bal[0]
 
-
+        print(zip(worked_list,worked_stock_name))
 
         return render_to_response("pasttransaction.html",{'DBalance':old_bal,
                                                           "buy_data":mod_data_buy,
-                                                          "sell_data":mod_data_sell})
+                                                          "sell_data":mod_data_sell,
+                                                          'worked_id':worked_list,
+                                                          'worked_stock': worked_stock_name,
+                                                          'asked':asked,
+                                                          'worked':zip(worked_list, worked_stock_name),
+                                                          's':s,
+                                                          's_name':s_name})
     else:
         return HttpResponseRedirect("/login-required/")
 
@@ -455,6 +552,8 @@ def live(request):
     plt.ylabel("Price")
     share_name = list(shares.objects.values_list('stock_name', flat=True).filter(sid=share_id_from_url))
     plt.title(str(share_name[0]))
+    fig = matplotlib.pyplot.gcf()
+    fig.set_size_inches(10, 6)
     original_dir = os.getcwd()
     os.chdir('Project/static/images/')
     if os._exists("graphLive.png"):

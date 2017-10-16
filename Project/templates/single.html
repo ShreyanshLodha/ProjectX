@@ -118,7 +118,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</select>
 <!-- Script to retain the value of selected item in dropdown even after refresh (uses cookies)-->
 <script type="text/javascript">
-cookiearray = allcookies.split('; ');
+cookiearray = document.cookie.split('; ');
 for(var i=0; i<cookiearray.length; i++) {
     name = cookiearray[i].split('=')[0];
     value = cookiearray[i].split('=')[1];
@@ -230,7 +230,7 @@ for(var i=0; i<cookiearray.length; i++) {
 <!-- //footer -->
 <!-- Custom script to disable div if cookie 'share-selected' does not exist-->
 <script type="text/javascript">
-    cookiearray = allcookies.split('; ');
+    cookiearray = document.cookie.split('; ');
     var flag = 0;
     var time = 0;
     for(var i=0; i<cookiearray.length; i++) {
